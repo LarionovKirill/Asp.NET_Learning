@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactAPP", "ContactAPP\ContactAPP.csproj", "{4B71769F-EB58-4DC9-8907-0AB784624CE6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactAppASP", "ContactAppASP\ContactAppASP.csproj", "{C0DA5F22-3C50-438C-8873-30EDCAC5E5E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4B71769F-EB58-4DC9-8907-0AB784624CE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B71769F-EB58-4DC9-8907-0AB784624CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4B71769F-EB58-4DC9-8907-0AB784624CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4B71769F-EB58-4DC9-8907-0AB784624CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0DA5F22-3C50-438C-8873-30EDCAC5E5E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0DA5F22-3C50-438C-8873-30EDCAC5E5E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0DA5F22-3C50-438C-8873-30EDCAC5E5E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0DA5F22-3C50-438C-8873-30EDCAC5E5E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {DCA76763-F051-4A70-B5F1-C386A4AA7D09}
+		SolutionGuid = {A74F35F2-B3A6-4FFB-9AB9-FA828D7EB39C}
 	EndGlobalSection
 EndGlobal
