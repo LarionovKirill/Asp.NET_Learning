@@ -6,9 +6,11 @@
     <title>@ViewData["Title"] - ContactAppASP</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ContactStyle.css">
     <link rel="stylesheet" href="~/ContactAppASP.styles.css" asp-append-version="true" />
 </head>
 <body>
+    <div class="wrapper">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -20,7 +22,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Contact</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -30,17 +32,44 @@
             </div>
         </nav>
     </header>
+            <div class="search">
+                <input class="find" type="search" placeholder="Введите имя">
+            </div>
+            <div class="list_contact">
+                <select size="5">
+                    <option>Контакт 1</option>
+                    <option>Контакт 2</option>
+                    <option>Контакт 3</option>
+                    <option>Контакт 4</option>
+                </select>
+            </div>
+            <div class="buttons_contact">
+                <input type="image" src="/images/Add_User_512x512.png"
+                       width="55px" height="55px" class="add">
+                <input type="image" src="/images/Remove_User_512x512.png"
+                       width="55px" height="55px" class="remove">
+                <input type="image" src="/images/User_Avatar_512x512.png"
+                       width="55px" height="55px" class="edit">
+            </div>
+            <div class="contact_info">
+                <div class="user_photo">
+                    <img src="/images/Empty_User_512x512.png" width="200px" height="200px">
+                </div>
+                <div class="form_info">
+                    <label>Имя:</label>
+                    <input class="name" type="search">
+                    <label class="lab">Номер:</label>
+                    <input class="phone" type="search">
+                    <label class ="lab">Email:</label>
+                    <input class="email" type="search">
+                </div>
+            </div>
+        </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - ContactAppASP - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

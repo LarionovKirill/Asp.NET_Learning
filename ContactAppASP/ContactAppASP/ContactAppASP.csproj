@@ -6,4 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\css\ContactStyle.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\ContactStyle.css" />
+  </ItemGroup>
+
 </Project>
