@@ -14,8 +14,4 @@
     <None Include="wwwroot\css\ContactStyle.css" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Shared\" />
-  </ItemGroup>
-
 </Project>
