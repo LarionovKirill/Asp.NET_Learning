@@ -90,6 +90,7 @@ option:active {
 	padding: 5px;
 	margin: 5px;
 	border-radius: 8px;
+	height: 35px;
 }
 /*Свойсвто для фото контакта.*/
 .user_photo {
