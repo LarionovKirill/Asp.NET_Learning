@@ -1,109 +1,104 @@
-/*Таблица.*/
-.wrapper {
-	display: grid;
-	grid-template-columns: 2fr 9fr;
-	grid-template-rows: 1fr 1fr 18fr 1fr;
-	height: 98vh;
+body {
+	min-height: 700px;
+	min-width: 700px;
+	margin: 3px;
 	margin-left: 50px;
 	margin-right: 50px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
-.container-fluid {
-	grid-row-start: 1;
-	grid-column: 1/2;
-	width: 100%;
-	display: inline;
+/*Таблица.*/
+.wrapper {
+	display: grid;
+	grid-template-columns: 2fr 9fr;
+	grid-template-rows: 1fr 18fr 1fr;
+	height: 98vh;
 }
 /*Поиск контакта.*/
 .search {
 	position: relative;
 	padding: 5px;
 	display: flex;
-	grid-column:1/2;
 }
 /*Список контактов.*/
 .list_contact {
-	 grid-column-start: 1;
-	 text-align: center;
-	 margin:5px;
+	grid-column-start: 1;
+	text-align: center;
+	margin: 5px;
 }
 /*Кнопки для работы с контактами.*/
 .buttons_contact {
-	 grid-column-start: 1;
+	grid-column-start: 1;
+	display: inline;
 }
 /*Информация о контактах.*/
 .contact_info {
-	 display: grid;
-	 grid-template-columns: 2fr 8fr;
-	 grid-column-start:2;
-	 grid-row: 2/4;
+	display: grid;
+	grid-template-columns: 1fr 8fr;
+	grid-column-start: 2;
+	grid-row: 1/4;
 }
 /*Ячейка с label и textbox.*/
 .form_info {
 	width: 100%;
-	font-size: 22px;
-	display: block;
+	font-size: 20px;
+	margin: 5px;
 }
-/*Стили лейблов*/
-.form_info label {
-	 background: #fff;
+	/*Стили лейблов*/
+.form_info label {	
+	background: #fff;
+	margin: 5px;
 }
 
 /*Свойства ListBox.*/
 select {
-	 width:100%;
-	 height:100%;
+	width: 100%;
+	height: 100%;
 }
 /*Стиль элемента ListBox.*/
 option {
-	 height:auto;
-	 margin: 5px;
-	 padding: 5px;
-	 text-align:left;
-	 color:black;
-	 font-size: 20px;
-	 width: auto
+	height: 20px;
+	margin: 5px;
+	padding: 5px;
+	text-align: left;
+	color: black;
+	font-size: 18px;
+	width: auto
 }
 /*Стиль нажатого элемента ListBox.*/
 option:active {
-	 opacity: 0.6;
-	 box-shadow: 0 #666;
-}
+	opacity: 0.6;		
+	box-shadow: 0 #666;
+	}
 /*Свойства TextBox поиска.*/
 .find {
 	width: 100%;
-	font-size: 20px;
+	font-size: 18px;
 	border-radius: 8px;
 	justify-content: center;
 	width: 100%;
 }
 /*Свойства нажатых кнопок контакта.*/
 .buttons_contact input:active {
-	 opacity: 0.6;
-	 box-shadow: 0 #666;
+	opacity: 0.6;
+	box-shadow: 0 #666;
 }
 /*Свойства textbox информации о контакте.*/
 .form_info input {
-	width: 90%;
-	font-size: 20px;
+	width: 100%;
+	font-size: 18px;
 	position: relative;
 	background: #fff;
+	padding: 5px;
+	margin: 5px;
 	border-radius: 11px;
-	padding-left: 8px;
-	display: block;
 }
 /*Свойсвто для фото контакта.*/
 .user_photo {
-	 position: relative;
-	 margin: 0px 30px 30px 30px;
+	position: relative;
+	margin: 30px;
 }
-.remove
-{
+
+.remove {
 	position: center;
 }
-.form_info .lab {
-	margin-top: 5px;
-}
-
-
