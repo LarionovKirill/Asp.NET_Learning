@@ -23,13 +23,13 @@ body {
 /*Список контактов.*/
 .list_contact {
 	grid-column-start: 1;
-	text-align: center;
 	margin: 5px;
 }
 /*Кнопки для работы с контактами.*/
 .buttons_contact {
 	grid-column-start: 1;
 	display: inline;
+	margin:5px;
 }
 /*Информация о контактах.*/
 .contact_info {
@@ -40,9 +40,7 @@ body {
 }
 /*Ячейка с label и textbox.*/
 .form_info {
-	width: 100%;
 	font-size: 20px;
-	margin: 5px;
 }
 	/*Стили лейблов*/
 .form_info label {	
@@ -75,7 +73,6 @@ option:active {
 	width: 100%;
 	font-size: 18px;
 	border-radius: 8px;
-	justify-content: center;
 	width: 100%;
 }
 /*Свойства нажатых кнопок контакта.*/
