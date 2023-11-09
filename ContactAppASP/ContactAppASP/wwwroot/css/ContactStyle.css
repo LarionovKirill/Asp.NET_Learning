@@ -1,0 +1,96 @@
+body {
+	min-height: 700px;
+	min-width: 700px;
+	margin: 3px;
+	padding: 10px 50px 10px 50px;
+}
+/*Таблица.*/
+.wrapper {
+	display: grid;
+	grid-template-columns: 2fr 9fr;
+	grid-template-rows: 1fr 18fr 1fr;
+	height: 90vh;
+}
+/*Поиск контакта.*/
+.search {
+	position: relative;
+	padding: 5px;
+	display: flex;
+	font-size: 18px;
+}
+/*Список контактов.*/
+.list_contact {
+	grid-column-start: 1;
+	margin: 5px;
+}
+/*Кнопки для работы с контактами.*/
+.buttons_contact {
+	grid-column-start: 1;
+	display: inline;
+	margin:5px;
+}
+/*Информация о контактах.*/
+.contact_info {
+	display: grid;
+	grid-template-columns: 1fr 8fr;
+	grid-column-start: 2;
+	grid-row: 1/4;
+}
+/*Ячейка с label и textbox.*/
+.form_info {
+	font-size: 20px;
+}
+	/*Стили лейблов*/
+.form_info label {	
+	background: #fff;
+	margin: 5px;
+}
+
+/*Свойства ListBox.*/
+select {
+	width: 100%;
+	height: 100%;
+}
+/*Стиль элемента ListBox.*/
+option {
+	height: 20px;
+	margin: 5px;
+	padding: 5px;
+	text-align: left;
+	color: black;
+	font-size: 18px;
+	width: auto
+}
+/*Стиль нажатого элемента ListBox.*/
+option:active {
+	opacity: 0.6;		
+	box-shadow: 0 #666;
+	}
+/*Свойства TextBox поиска.*/
+.find {
+	width: 100%;
+	font-size: 18px;
+	border-radius: 8px;
+	height:35px;
+}
+/*Свойства нажатых кнопок контакта.*/
+.buttons_contact input:active {
+	opacity: 0.6;
+	box-shadow: 0 #666;
+}
+/*Свойства textbox информации о контакте.*/
+.form_info input {
+	width: 100%;
+	font-size: 18px;
+	position: relative;
+	background: #fff;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 8px;
+	height: 35px;
+}
+/*Свойсвто для фото контакта.*/
+.user_photo {
+	position: relative;
+	margin: 30px;
+}
