@@ -3,10 +3,10 @@ using ContactDomain.Entity;
 
 namespace Contact.DAL
 {
-    public class appDbContext : DbContext
+    public class AppDbContext : DbContext
     {
 
-        public appDbContext(DbContextOptions options) : base(options)
+        public AppDbContext(DbContextOptions options) : base(options)
         {
             Database.EnsureCreated();
         }
