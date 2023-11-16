@@ -1,19 +1,26 @@
-﻿using ContactAppASP.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace ContactAppASP.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        [HttpGet]
+        public IActionResult Index()
         {
-            _logger = logger;
+            return View();
         }
 
-        public IActionResult Index()
+        [HttpPost]
+        public IActionResult Index(string name, string number, string email)
+        {
+            ViewData["name"] = name;
+            ViewData["number"] = number;
+            ViewData["email"] = email;
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }

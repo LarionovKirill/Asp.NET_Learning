@@ -1,0 +1,47 @@
+/*Таблица.*/
+.wrapper {
+	display: grid;
+	grid-template-columns: 2fr 9fr;
+	grid-template-rows: 1fr 18fr 1fr;
+	height: 90vh;
+}
+/*Информация о контактах.*/
+.contact_info {
+	display: grid;
+	grid-template-columns: 1fr 8fr;
+	grid-column-start: 2;
+	grid-row: 1/4;
+}
+/*Ячейка с label и textbox.*/
+.form_info {
+	font-size: 20px;
+}
+	/*Стили лейблов*/
+.form_info label {	
+	background: #fff;
+	margin: 5px;
+}
+
+/*Свойства textbox информации о контакте.*/
+.form_info input {
+	width: 100%;
+	font-size: 18px;
+	position: relative;
+	background: #fff;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 8px;
+	height: 35px;
+}
+/*Свойсвто для фото контакта.*/
+.user_photo {
+	position: relative;
+	margin: 30px;
+	text-align: center;
+}
+.btn {
+	border-radius: 8px;
+	text-align: center;
+	padding: 5px;
+	margin: 5px;
+}

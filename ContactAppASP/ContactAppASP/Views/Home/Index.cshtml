@@ -1,5 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Home page";
+    var name = ViewData["name"];
+    var number = ViewData["number"];
+    var email = ViewData["email"];
 }
 
 <div class="wrapper">
@@ -15,12 +18,14 @@
         </select>
     </div>
     <div class="buttons_contact">
+        <form>
         <input type="image" src="~/images/Add_User_512x512.png"
-               width="30px" height="30px" class="add">
+               width="30px" height="30px" class="add" id="add" asp-action="Create">
         <input type="image" src="~/images/Edit_User_512x512.png"
                width="30px" height="30px" class="edit">
         <input type="image" src="~/images/Remove_User_512x512.png"
                width="30px" height="30px" class="remove">
+        </form>
     </div>
     <div class="contact_info">
         <div class="user_photo">
@@ -28,11 +33,11 @@
         </div>
         <div class="form_info">
             <label>Имя:</label>
-            <input class="name" type="search">
+            <input class="name" type="search" value="@name">
             <label>Номер:</label>
-            <input class="phone" type="search">
+            <input class="phone" type="search" value="@number">
             <label>Email:</label>
-            <input class="email" type="search">
+            <input class="email" type="search" value="@email">
         </div>
     </div>
 </div>
