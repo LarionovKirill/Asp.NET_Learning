@@ -1,18 +1,18 @@
-﻿
-<!DOCKTYPE html>
+﻿<!DOCKTYPE html>
 <html>
     <head>
     <meta charset="utf-8">
     <title>Add Contact</title>
-    <link rel="stylesheet" href="~/css/CreateStyle.css" asp-append-version="true">
+    <link rel="stylesheet" href="CreateStyle.css" asp-append-version="true">
     </head>
     <body>
 <h2>Добавление пользователя</h2>
 <form asp-controller="home">
     <div class="contact_info">
         <div class="user_photo">
-            <img src="~/images/User_Avatar_512x512.png" width="150px" height="150px">
-                <button class="btn" asp-action="Index">Добавить фото</button>
+            <img src="~/images/User_Avatar_512x512.png" width="250px"
+            height="200px" class="avatar">
+                <input type="file" class="inputFile" name='photo' accept="image/*">
         </div>
         <div class="form_info">
             <label>Имя:</label>
@@ -27,3 +27,30 @@
 </form>
 </body>
 </html>
+
+<script>
+    document.querySelector('[type="file"]').addEventListener('change', (e) => {
+        const elFileImg = document.querySelector('.avatar');
+        // сохраним в переменную files значение свойства files
+        const files = e.target.files;
+        // сохраним количество элементов в files в переменную countFiles
+        const countFiles = files.length;
+        // если количество выбранных файлов больше 0
+        if (!countFiles) {
+            alert('Не выбран файл!');
+            return;
+        }
+        // присваиваем переменной selectedFile ссылку на выбранный файл
+        const selectedFile = files[0];
+        if (!/^image/.test(selectedFile.type)) {
+            alert('Выбранный файл не является изображением!');
+            return;
+        }
+        const reader = new FileReader();
+        reader.readAsDataURL(selectedFile);
+        reader.addEventListener('load', (e) => {
+            elFileImg.src = e.target.result;
+            elFileImg.alt = selectedFile.name;
+        });
+    });
+</script>
