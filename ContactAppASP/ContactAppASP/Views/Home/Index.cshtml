@@ -21,7 +21,7 @@
     <div class="buttons_contact">
         <input type="image" src="~/images/Add_User_512x512.png"
                width="30px" height="30px" class="add" id="add"
-               asp-action="Create" asp-controller="Home">
+               onclick="location.href='@Url.Action("Create", "Home")'">
         <input type="image" src="~/images/Edit_User_512x512.png"
                width="30px" height="30px" class="edit">
         <input type="image" src="~/images/Remove_User_512x512.png"
