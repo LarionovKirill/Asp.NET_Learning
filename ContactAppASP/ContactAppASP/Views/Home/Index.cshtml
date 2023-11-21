@@ -3,7 +3,6 @@
     var name = ViewData["name"];
     var number = ViewData["number"];
     var email = ViewData["email"];
-    Html.ActionLink("Create", "Index");
     List<Contact> Contacts = new List<Contact>();
 }
 
@@ -25,9 +24,9 @@
                width="30px" height="30px" class="add" id="add"
                onclick="location.href='@Url.Action("Create", "Home")'">
         <input type="image" src="~/images/Edit_User_512x512.png"
-               width="30px" height="30px" class="edit">
+               width="30px" height="30px" class="edit" onclick="editContact()">
         <input type="image" src="~/images/Remove_User_512x512.png"
-                   width="30px" height="30px" class="remove" onclick="onChange()">
+               width="30px" height="30px" class="remove" onclick="removeContact()">
     </div>
     <div class="contact_info">
         <div class="user_photo">
@@ -45,13 +44,22 @@
 </div>
 
 <script>
-    function onChange() {
+    function removeContact() {
         var select = document.querySelector('select');
         if (select.value.length>0) {
             alert(select.value + ' был удален');
         }
         else { 
             alert('Контакт не был выбран.');
+        }
+    }
+    function editContact() { 
+        var select = document.querySelector('select');
+        if (select.value.length > 0) {
+            console.log('Переход на страницу редактирования');
+        }
+        else {
+            alert('Выберите пользователя для редактирования')
         }
     }
 </script>
