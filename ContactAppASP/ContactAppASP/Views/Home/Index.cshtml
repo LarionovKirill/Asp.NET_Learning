@@ -4,6 +4,7 @@
     var number = ViewData["number"];
     var email = ViewData["email"];
     Html.ActionLink("Create", "Index");
+    List<Contact> Contacts = new List<Contact>();
 }
 
 <div class="wrapper">
@@ -12,10 +13,11 @@
     </div>
     <div class="list_contact">
         <select size="5">
-            <option>Контакт 1</option>
-            <option>Контакт 2</option>
-            <option>Контакт 3</option>
-            <option>Контакт 4</option>
+            @for (int i = 0; i < 5; i++)
+            {
+                Contacts.Add(ContactsFactory.GenerateContact());
+                <option>@Contacts[Contacts.Count-1].Name</option>
+            }
         </select>
     </div>
     <div class="buttons_contact">
