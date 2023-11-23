@@ -1,29 +1,29 @@
 ﻿<!DOCKTYPE html>
 <html>
-    <head>
+<head>
     <meta charset="utf-8">
-    <title>Add Contact</title>
+    <title>Edit Contact</title>
     <link rel="stylesheet" href="~/css/CreateStyle.css" asp-append-version="true">
-    </head>
-    <body>
-<form asp-controller="home">
-    <div class="contact_info">
-        <div class="user_photo">
-            <img src="~/images/User_Avatar_512x512.png" width="250px"
-            height="160px" class="avatar">
+</head>
+<body>
+    <form asp-controller="home">
+        <div class="contact_info">
+            <div class="user_photo">
+                <img src="~/images/User_Avatar_512x512.png" width="250px"
+                     height="160px" class="avatar">
                 <input type="file" class="inputFile" name='photo' accept="image/*">
+            </div>
+            <div class="form_info">
+                <label>Имя:</label>
+                <input class="name" type="search" name='name' value="@ViewData["name"]">
+                <label>Номер:</label>
+                <input class="phone" type="search" name='number' value="@ViewData["phone"]">
+                <label>Email:</label>
+                <input class="email" type="search" name='email' value="@ViewData["email"]">
+                <button class="btn" asp-action="Index">Сохранить</button>
+            </div>
         </div>
-        <div class="form_info">
-            <label>Имя:</label>
-            <input class="name" type="search" name='name'>
-            <label>Номер:</label>
-            <input class="phone" type="search" name='number'>
-            <label>Email:</label>
-            <input class="email" type="search" name='email'>
-            <button class="btn" asp-action="AddContact">Сохранить</button>
-        </div>
-    </div>
-</form>
+    </form>
 </body>
 </html>
 

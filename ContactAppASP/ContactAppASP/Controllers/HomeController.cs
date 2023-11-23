@@ -30,14 +30,14 @@ namespace ContactAppASP.Controllers
         /// <param name="name">Имя контакта.</param>
         /// <param name="number">Номер контакта.</param>
         /// <param name="email">Email контакта.</param>
-        /// <returns></returns>
+        /// <returns>Страница с новым контактом.</returns>
         [HttpPost]
-        public IActionResult Index(string name, string number, string email)
+        public IActionResult AddContact(string name, string number, string email)
         {
             ContactsFactory.Contact newContact =
                 new ContactsFactory.Contact(name, email, number);
             ContactList.AddToList(newContact);
-            return View(ContactList.GetList());
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -72,6 +72,18 @@ namespace ContactAppASP.Controllers
         /// <returns>Возвращает представление с удаленным контактом.</returns>
         [HttpGet]
         public IActionResult RemoveContact(int index)
+        {
+            ContactList.RemoveInList(index);
+            return View("Index", ContactList.GetList());
+        }
+
+        /// <summary>
+        /// Запрос на удаление выбранного пользователем контакта.
+        /// </summary>
+        /// <param name="index">Переданный индекс контакта в базе.</param>
+        /// <returns>Возвращает представление с удаленным контактом.</returns>
+        [HttpGet]
+        public IActionResult EditContact(int index)
         {
             ContactList.RemoveInList(index);
             return View("Index", ContactList.GetList());
