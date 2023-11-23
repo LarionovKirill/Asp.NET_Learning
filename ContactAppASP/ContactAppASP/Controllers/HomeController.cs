@@ -45,7 +45,7 @@ namespace ContactAppASP.Controllers
         /// </summary>
         /// <returns>Переходит на форму создания контакта.</returns>
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult AddContact()
         {
             return View();
         }
@@ -86,7 +86,16 @@ namespace ContactAppASP.Controllers
         public IActionResult EditContact(int index)
         {
             ContactList.RemoveInList(index);
-            return View("Index", ContactList.GetList());
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Отмена действия с контактом.
+        /// </summary>
+        /// <returns>Возвращяется на главную страницу.</returns>
+        public IActionResult CancelAction()
+        {
+            return RedirectToAction("Index");
         }
     }
 }
