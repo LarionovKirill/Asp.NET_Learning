@@ -1,9 +1,6 @@
-﻿@{
+﻿@model List<Contact>
+@{
     ViewData["Title"] = "Home page";
-    var name = ViewData["name"];
-    var number = ViewData["number"];
-    var email = ViewData["email"];
-    List<Contact> Contacts = new List<Contact>();
 }
 
 <div class="wrapper">
@@ -11,11 +8,10 @@
         <input class="find" type="search" placeholder="Введите имя">
     </div>
     <div class="list_contact">
-        <select size="5">
-            @for (int i = 0; i < 5; i++)
+        <select size="5" class="contactList">
+            @for (int i = 0; i < Model.Count; i++)
             {
-                Contacts.Add(ContactsFactory.GenerateContact());
-                <option>@Contacts[Contacts.Count-1].Name</option>
+                <option onclick="ShowInfo()">@Model[i].Name</option>
             }
         </select>
     </div>
@@ -24,9 +20,9 @@
                width="30px" height="30px" class="add" id="add"
                onclick="location.href='@Url.Action("Create", "Home")'">
         <input type="image" src="~/images/Edit_User_512x512.png"
-               width="30px" height="30px" class="edit" onclick="editContact()">
+               width="30px" height="30px" class="edit">
         <input type="image" src="~/images/Remove_User_512x512.png"
-               width="30px" height="30px" class="remove" onclick="removeContact()">
+               width="30px" height="30px" class="remove" onclick="RemoveContact()">
     </div>
     <div class="contact_info">
         <div class="user_photo">
@@ -34,32 +30,54 @@
         </div>
         <div class="form_info">
             <label>Имя:</label>
-            <input class="name" type="search" value="@name">
+            <input class="name" type="search" value="@ViewData["name"]">
             <label>Номер:</label>
-            <input class="phone" type="search" value="@number">
+            <input class="phone" type="search" value="@ViewData["phone"]">
             <label>Email:</label>
-            <input class="email" type="search" value="@email">
+            <input class="email" type="search" value="@ViewData["email"]">
         </div>
     </div>
 </div>
 
 <script>
-    function removeContact() {
+    function ShowInfo() {
         var select = document.querySelector('select');
-        if (select.value.length>0) {
-            alert(select.value + ' был удален');
-        }
-        else { 
-            alert('Контакт не был выбран.');
+        var index = select.selectedIndex;
+        if (index >= 0) {
+            $.ajax({
+                method: "GET",
+                url: "Home/ShowContact?index=" + index,
+                success: function (data) {
+                    $(".container").html(data);
+                    select = document.querySelector('select');
+                    select.selectedIndex = index;
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+                })
+            }
+        else {
+            alert('Выберите пользователя');
         }
     }
-    function editContact() { 
+    function RemoveContact() {
         var select = document.querySelector('select');
-        if (select.value.length > 0) {
-            console.log('Переход на страницу редактирования');
+        var index = select.selectedIndex;
+        if (index >= 0) {
+            $.ajax({
+                method: "GET",
+                url: "Home/RemoveContact?index=" + index,
+                success: function (data) {
+                    $(".container").html(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
         }
         else {
-            alert('Выберите пользователя для редактирования')
+            alert('Выберите пользователя');
         }
     }
 </script>
