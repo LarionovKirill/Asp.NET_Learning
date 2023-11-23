@@ -116,7 +116,7 @@ namespace ContactAppASP.Controllers
         /// Отмена действия с контактом.
         /// </summary>
         /// <returns>Возвращяется на главную страницу.</returns>
-        [HttpGet]
+        [HttpPost]
         public IActionResult CancelAction()
         {
             return RedirectToAction("Index");
