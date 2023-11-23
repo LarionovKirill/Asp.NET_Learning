@@ -58,7 +58,7 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult ShowContact(int index)
         {
-            var contact = ContactList.ShowContact(index);
+            var contact = ContactList.GetContact(index);
             ViewData["name"] = contact.Name;
             ViewData["phone"] = contact.Phone;
             ViewData["email"] = contact.Email;
@@ -85,7 +85,30 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult EditContact(int index)
         {
-            ContactList.RemoveInList(index);
+            var selectedContact = ContactList.GetContact(index);
+            ViewData["name"] = selectedContact.Name;
+            ViewData["phone"] = selectedContact.Phone;
+            ViewData["email"] = selectedContact.Email;
+            ContactList.SelectedIndex = index;
+            return View();
+        }
+
+        /// <summary>
+        /// Присваивает новые значения контакту.
+        /// </summary>
+        /// <param name="name">Измененное имя.</param>
+        /// <param name="number">Измененный номер.</param>
+        /// <param name="email">Измененный Email.</param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult SaveEditContact(string name, string number, string email)
+        {
+            var contacts = ContactList.GetList();
+            ViewBag.Index = ViewData["index"];
+            contacts[ContactList.SelectedIndex].Name = name;
+            contacts[ContactList.SelectedIndex].Phone = number;
+            contacts[ContactList.SelectedIndex].Email = email;
+            ContactList.SelectedIndex = -1;
             return RedirectToAction("Index");
         }
 
@@ -93,6 +116,7 @@ namespace ContactAppASP.Controllers
         /// Отмена действия с контактом.
         /// </summary>
         /// <returns>Возвращяется на главную страницу.</returns>
+        [HttpGet]
         public IActionResult CancelAction()
         {
             return RedirectToAction("Index");

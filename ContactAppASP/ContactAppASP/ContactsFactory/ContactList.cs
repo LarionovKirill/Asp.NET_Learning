@@ -12,6 +12,11 @@
         private static List<Contact> Contacts { get; set; } = new List<Contact>();
 
         /// <summary>
+        /// Хранит выбранный индекс контакта.
+        /// </summary>
+        public static int SelectedIndex { get; set; }
+
+        /// <summary>
         /// Метод передачи списка.
         /// </summary>
         /// <returns>Список контактов.</returns>
@@ -47,7 +52,7 @@
         /// </summary>
         /// <param name="index">Индекс контакта.</param>
         /// <returns>Выбранный контакт.</returns>
-        public static Contact ShowContact(int index)
+        public static Contact GetContact(int index)
         {
             return Contacts[index];
         }

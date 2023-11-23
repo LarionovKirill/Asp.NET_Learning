@@ -20,7 +20,8 @@
                 <input class="phone" type="search" name='number' value="@ViewData["phone"]">
                 <label>Email:</label>
                 <input class="email" type="search" name='email' value="@ViewData["email"]">
-                <button class="btn" asp-action="Index">Сохранить</button>
+                <button class="btn" asp-action="SaveEditContact">Сохранить</button>
+                <Button class="btn" asp-action="CancelAction">Отмена</Button>
             </div>
         </div>
     </form>

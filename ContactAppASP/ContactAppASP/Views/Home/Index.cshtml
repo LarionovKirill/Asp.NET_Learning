@@ -20,7 +20,7 @@
                width="30px" height="30px" class="add" id="add"
                onclick="location.href='@Url.Action("AddContact", "Home")'">
         <input type="image" src="~/images/Edit_User_512x512.png"
-               width="30px" height="30px" class="edit">
+               width="30px" height="30px" class="edit" onclick="EditContact()">
         <input type="image" src="~/images/Remove_User_512x512.png"
                width="30px" height="30px" class="remove" onclick="RemoveContact()">
     </div>
@@ -62,6 +62,26 @@
         }
     }
 
+    function EditContact() {
+        var select = document.querySelector('select');
+        var index = select.selectedIndex;
+        if (index >= 0) {
+            $.ajax({
+                method: "GET",
+                url: "Home/EditContact?index=" + index,
+                success: function (data) {
+                    $(".container").html(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+        else {
+            alert('Выберите пользователя');
+        }
+    }
+
     function RemoveContact() {
         var select = document.querySelector('select');
         var index = select.selectedIndex;
@@ -81,4 +101,5 @@
             alert('Выберите пользователя');
         }
     }
+
 </script>
