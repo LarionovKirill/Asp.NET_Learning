@@ -1,5 +1,8 @@
 ﻿namespace ContactAppASP.ContactsFactory
 {
+    /// <summary>
+    /// Класс контакта.
+    /// </summary>
     public class Contact
     {
         /// <summary>
