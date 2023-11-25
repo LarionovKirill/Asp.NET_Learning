@@ -6,22 +6,22 @@
     public class ContactEntity
     {
         /// <summary>
-        /// Свойство Id контакта.
+        /// Id контакта.
         /// </summary>
         public long Id { get; set; }
 
         /// <summary>
-        /// Свойство имени в контакте.
+        /// Имя контакта.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Свойство Email в контакте.
+        /// Email контакта.
         /// </summary>
         public string Email { get; set; }
 
         /// <summary>
-        /// Свойство номера телефона в контакте.
+        /// Номера телефона контакта.
         /// </summary>
         public string Phone { get; set; }
     }
