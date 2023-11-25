@@ -4,7 +4,7 @@ using ContactAppASP.ContactsFactory;
 namespace ContactAppASP.Controllers
 {
     /// <summary>
-    /// Контроллер ContactApp.
+    /// Главнконтроллер.
     /// </summary>
     public class HomeController : Controller
     {
@@ -12,12 +12,12 @@ namespace ContactAppASP.Controllers
         /// Список контактов в базе.
         /// Будет заменен потом на БД.
         /// </summary>
-        List<ContactsFactory.Contact> contacts = ContactList.GetList();
+        private List<ContactsFactory.Contact> contacts = ContactList.GetList();
 
         /// <summary>
         /// Запрос главной страницы.
         /// </summary>
-        /// <returns>Главная страница.</returns>
+        /// <returns>Возвращает главную страница.</returns>
         [HttpGet]
         public IActionResult Index()
         {
@@ -30,12 +30,11 @@ namespace ContactAppASP.Controllers
         /// <param name="name">Имя контакта.</param>
         /// <param name="number">Номер контакта.</param>
         /// <param name="email">Email контакта.</param>
-        /// <returns>Страница с новым контактом.</returns>
+        /// <returns>Возвращает страницу с добавленным контактом.</returns>
         [HttpPost]
         public IActionResult AddContact(string name, string number, string email)
         {
-            ContactsFactory.Contact newContact =
-                new ContactsFactory.Contact(name, email, number);
+            var newContact = new ContactsFactory.Contact(name, email, number);
             ContactList.AddToList(newContact);
             return RedirectToAction("Index");
         }
@@ -43,7 +42,7 @@ namespace ContactAppASP.Controllers
         /// <summary>
         /// Запускает представление создания контакта.
         /// </summary>
-        /// <returns>Переходит на форму создания контакта.</returns>
+        /// <returns>Возвращает форму создания контакта.</returns>
         [HttpGet]
         public IActionResult AddContact()
         {
@@ -99,7 +98,7 @@ namespace ContactAppASP.Controllers
         /// <param name="name">Измененное имя.</param>
         /// <param name="number">Измененный номер.</param>
         /// <param name="email">Измененный Email.</param>
-        /// <returns></returns>
+        /// <returns>Возвращает на главную страницу с исправленным контактом.</returns>
         [HttpPost]
         public IActionResult SaveEditContact(string name, string number, string email)
         {
