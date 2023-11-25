@@ -34,8 +34,7 @@ namespace ContactAppASP.Controllers
         [HttpPost]
         public IActionResult AddContact(string name, string number, string email)
         {
-            ContactsFactory.Contact newContact =
-                new ContactsFactory.Contact(name, email, number);
+            var newContact = new ContactsFactory.Contact(name, email, number);
             ContactList.AddToList(newContact);
             return RedirectToAction("Index");
         }
