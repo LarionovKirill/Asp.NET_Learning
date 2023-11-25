@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ContactAppASP.ContactsFactory;
+using ContactAppASP.Models;
 
 namespace ContactAppASP.Controllers
 {
@@ -12,7 +12,7 @@ namespace ContactAppASP.Controllers
         /// Список контактов в базе.
         /// Будет заменен потом на БД.
         /// </summary>
-        private List<ContactsFactory.Contact> contacts = ContactList.GetList();
+        private List<Models.Contact> contacts = ContactList.GetList();
 
         /// <summary>
         /// Запрос главной страницы.
@@ -34,7 +34,7 @@ namespace ContactAppASP.Controllers
         [HttpPost]
         public IActionResult AddContact(string name, string number, string email)
         {
-            var newContact = new ContactsFactory.Contact(name, email, number);
+            var newContact = new Models.Contact(name, email, number);
             ContactList.AddToList(newContact);
             return RedirectToAction("Index");
         }

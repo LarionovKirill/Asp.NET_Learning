@@ -1,4 +1,4 @@
-﻿namespace ContactAppASP.ContactsFactory
+﻿namespace ContactAppASP.Models
 {
     /// <summary>
     /// Класс контакта.
@@ -25,7 +25,7 @@
         /// </summary>
         public Contact()
         {
-            
+
         }
 
         /// <summary>

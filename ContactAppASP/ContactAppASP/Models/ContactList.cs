@@ -1,4 +1,4 @@
-﻿namespace ContactAppASP.ContactsFactory
+﻿namespace ContactAppASP.Models
 {
     /// <summary>
     /// Список контактов.
@@ -22,7 +22,7 @@
         /// <returns>Список контактов.</returns>
         public static List<Contact> GetList()
         {
-             return Contacts;
+            return Contacts;
         }
 
         /// <summary>
@@ -41,7 +41,7 @@
         /// </summary>
         /// <param name="index">Индекс контакта.</param>
         /// <returns>Обновленный список.</returns>
-        public static List<Contact> RemoveInList(int index) 
+        public static List<Contact> RemoveInList(int index)
         {
             Contacts.RemoveAt(index);
             return Contacts;
