@@ -4,7 +4,7 @@ using ContactAppASP.ContactsFactory;
 namespace ContactAppASP.Controllers
 {
     /// <summary>
-    /// Главный контроллер.
+    /// Главнконтроллер.
     /// </summary>
     public class HomeController : Controller
     {
@@ -12,7 +12,7 @@ namespace ContactAppASP.Controllers
         /// Список контактов в базе.
         /// Будет заменен потом на БД.
         /// </summary>
-        List<ContactsFactory.Contact> contacts = ContactList.GetList();
+        private List<ContactsFactory.Contact> contacts = ContactList.GetList();
 
         /// <summary>
         /// Запрос главной страницы.
