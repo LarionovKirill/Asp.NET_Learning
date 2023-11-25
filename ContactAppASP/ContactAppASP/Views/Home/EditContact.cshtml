@@ -27,30 +27,3 @@
     </form>
 </body>
 </html>
-
-<script>
-    document.querySelector('[type="file"]').addEventListener('change', (e) => {
-        const elFileImg = document.querySelector('.avatar');
-        // сохраним в переменную files значение свойства files
-        const files = e.target.files;
-        // сохраним количество элементов в files в переменную countFiles
-        const countFiles = files.length;
-        // если количество выбранных файлов больше 0
-        if (!countFiles) {
-            alert('Не выбран файл!');
-            return;
-        }
-        // присваиваем переменной selectedFile ссылку на выбранный файл
-        const selectedFile = files[0];
-        if (!/^image/.test(selectedFile.type)) {
-            alert('Выбранный файл не является изображением!');
-            return;
-        }
-        const reader = new FileReader();
-        reader.readAsDataURL(selectedFile);
-        reader.addEventListener('load', (e) => {
-            elFileImg.src = e.target.result;
-            elFileImg.alt = selectedFile.name;
-        });
-    });
-</script>
