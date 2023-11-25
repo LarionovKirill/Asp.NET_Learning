@@ -21,7 +21,8 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(ContactList.GetList());
+            ViewBag.Contacts = ContactList.GetList();
+            return View();
         }
 
         /// <summary>
@@ -46,7 +47,8 @@ namespace ContactAppASP.Controllers
             ViewData["name"] = contact.Name;
             ViewData["phone"] = contact.Phone;
             ViewData["email"] = contact.Email;
-            return View("Index", ContactList.GetList());
+            ViewBag.Contacts = ContactList.GetList();
+            return View("Index");
         }
 
         /// <summary>
@@ -58,7 +60,8 @@ namespace ContactAppASP.Controllers
         public IActionResult RemoveContact(int index)
         {
             ContactList.RemoveInList(index);
-            return View("Index", ContactList.GetList());
+            ViewBag.Contacts = ContactList.GetList();
+            return View("Index");
         }
 
         /// <summary>

@@ -8,21 +8,33 @@
         <input class="find" type="search" placeholder="Введите имя">
     </div>
     <div class="list_contact">
-        <select size="5" class="contactList">
-            @for (int i = 0; i < Model.Count; i++)
-            {
-                <option onclick="ShowInfo()">@Model[i].Name</option>
-            }
+        <select 
+            size="5" 
+            class="contactList" 
+            asp-items="@(new SelectList(ViewBag.Contacts,"Name","Name"))"
+            onclick="ShowInfo()">
         </select>
     </div>
     <div class="buttons_contact">
-        <input type="image" src="~/images/Add_User_512x512.png"
-               width="30px" height="30px" class="add" id="add"
+        <input type="image" 
+            src="~/images/Add_User_512x512.png"
+               width="30px" 
+               height="30px" 
+               class="add" 
+               id="add"
                onclick="location.href='@Url.Action("AddContact", "Home")'">
-        <input type="image" src="~/images/Edit_User_512x512.png"
-               width="30px" height="30px" class="edit" onclick="EditContact()">
-        <input type="image" src="~/images/Remove_User_512x512.png"
-               width="30px" height="30px" class="remove" onclick="RemoveContact()">
+        <input type="image" 
+            src="~/images/Edit_User_512x512.png"
+            width="30px" 
+            height="30px" 
+            class="edit" 
+            onclick="EditContact()">
+        <input type="image" 
+            src="~/images/Remove_User_512x512.png"
+            width="30px" 
+            height="30px" 
+            class="remove" 
+            onclick="RemoveContact()">
     </div>
     <div class="contact_info">
         <div class="user_photo">
