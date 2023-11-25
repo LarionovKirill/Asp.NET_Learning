@@ -4,7 +4,7 @@ using ContactAppASP.ContactsFactory;
 namespace ContactAppASP.Controllers
 {
     /// <summary>
-    /// Контроллер ContactApp.
+    /// Главный контроллер.
     /// </summary>
     public class HomeController : Controller
     {
