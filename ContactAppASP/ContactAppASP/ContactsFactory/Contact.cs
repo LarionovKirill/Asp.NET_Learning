@@ -6,22 +6,22 @@
     public class Contact
     {
         /// <summary>
-        /// Свойство имени в контакте.
+        /// Имя контака.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Свойство Email в контакте.
+        /// Электронная почта контакта.
         /// </summary>
         public string Email { get; set; }
 
         /// <summary>
-        /// Свойство номера телефона в контакте.
+        /// Номер телефона контакта.
         /// </summary>
         public string Phone { get; set; }
 
         /// <summary>
-        /// Конструктор без параметров.
+        /// Создает экземпляр класса <see cref="Contact"/>
         /// </summary>
         public Contact()
         {
