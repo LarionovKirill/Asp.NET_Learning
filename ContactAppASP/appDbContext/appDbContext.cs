@@ -9,7 +9,6 @@ namespace Contact.DAL
 
         public AppDbContext(DbContextOptions options) : base(options)
         {
-
             Database.EnsureCreated();
         }
     }
