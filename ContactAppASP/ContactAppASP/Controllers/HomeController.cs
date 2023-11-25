@@ -55,7 +55,7 @@ namespace ContactAppASP.Controllers
         /// <param name="index">Переданный индекс контакта в базе.</param>
         /// <returns>Возвращает представление с информацией о контакте.</returns>
         [HttpGet]
-        public IActionResult ShowContact(int index)
+        public IActionResult GetContact(int index)
         {
             var contact = ContactList.GetContact(index);
             ViewData["name"] = contact.Name;

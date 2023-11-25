@@ -46,7 +46,7 @@
         if (index >= 0) {
             $.ajax({
                 method: "GET",
-                url: "Home/ShowContact?index=" + index,
+                url: "Home/GetContact?index=" + index,
                 success: function (data) {
                     $(".container").html(data);
                     select = document.querySelector('select');
