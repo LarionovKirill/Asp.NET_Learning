@@ -1,5 +1,8 @@
 ﻿namespace ContactDomain.Entity
 {
+    /// <summary>
+    /// Класс представления контакта в базе данных.
+    /// </summary>
     public class ContactEntity
     {
         /// <summary>
