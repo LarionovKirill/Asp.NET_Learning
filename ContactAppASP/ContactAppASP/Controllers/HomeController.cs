@@ -25,28 +25,13 @@ namespace ContactAppASP.Controllers
         }
 
         /// <summary>
-        /// POST запрос для передачи введенных данных в базу.
-        /// </summary>
-        /// <param name="name">Имя контакта.</param>
-        /// <param name="number">Номер контакта.</param>
-        /// <param name="email">Email контакта.</param>
-        /// <returns>Возвращает страницу с добавленным контактом.</returns>
-        [HttpPost]
-        public IActionResult AddContact(string name, string number, string email)
-        {
-            var newContact = new Models.Contact(name, email, number);
-            ContactList.AddToList(newContact);
-            return RedirectToAction("Index");
-        }
-
-        /// <summary>
         /// Запускает представление создания контакта.
         /// </summary>
         /// <returns>Возвращает форму создания контакта.</returns>
         [HttpGet]
         public IActionResult AddContact()
         {
-            return View();
+            return View("EditContact");
         }
 
         /// <summary>
@@ -102,13 +87,22 @@ namespace ContactAppASP.Controllers
         [HttpPost]
         public IActionResult SaveEditContact(string name, string number, string email)
         {
-            var contacts = ContactList.GetList();
-            ViewBag.Index = ViewData["index"];
-            contacts[ContactList.SelectedIndex].Name = name;
-            contacts[ContactList.SelectedIndex].Phone = number;
-            contacts[ContactList.SelectedIndex].Email = email;
-            ContactList.SelectedIndex = -1;
-            return RedirectToAction("Index");
+            if (ContactList.SelectedIndex < 0)
+            {
+                var newContact = new Models.Contact(name, email, number);
+                ContactList.AddToList(newContact);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                var contacts = ContactList.GetList();
+                ViewBag.Index = ViewData["index"];
+                contacts[ContactList.SelectedIndex].Name = name;
+                contacts[ContactList.SelectedIndex].Phone = number;
+                contacts[ContactList.SelectedIndex].Email = email;
+                ContactList.SelectedIndex = -1;
+                return RedirectToAction("Index");
+            }
         }
 
         /// <summary>

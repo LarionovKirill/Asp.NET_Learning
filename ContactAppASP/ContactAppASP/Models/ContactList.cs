@@ -14,7 +14,7 @@
         /// <summary>
         /// Хранит выбранный индекс контакта.
         /// </summary>
-        public static int SelectedIndex { get; set; }
+        public static int SelectedIndex { get; set; } = -1;
 
         /// <summary>
         /// Метод передачи списка.
