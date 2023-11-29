@@ -96,16 +96,14 @@ namespace ContactAppASP.Controllers
                 ContactList.AddToList(newContact);
                 return RedirectToAction("Index");
             }
-            else
-            {
-                var contacts = ContactList.GetList();
-                ViewBag.Index = ViewData["index"];
-                contacts[ContactList.SelectedIndex].Name = name;
-                contacts[ContactList.SelectedIndex].Phone = number;
-                contacts[ContactList.SelectedIndex].Email = email;
-                ContactList.SelectedIndex = -1;
-                return RedirectToAction("Index");
-            }
+
+            var contacts = ContactList.GetList();
+            ViewBag.Index = ViewData["index"];
+            contacts[ContactList.SelectedIndex].Name = name;
+            contacts[ContactList.SelectedIndex].Phone = number;
+            contacts[ContactList.SelectedIndex].Email = email;
+            ContactList.SelectedIndex = -1;
+            return RedirectToAction("Index");
         }
 
         /// <summary>
