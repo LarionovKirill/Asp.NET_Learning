@@ -2,7 +2,7 @@
  * Посылает AJAX - запрос на сервер по выбранному контакту
  * и выводит информацию на экран.
  */
-function ShowInfo() {
+function showInfo() {
     var select = document.querySelector('select');
     var index = select.selectedIndex;
     if (index < 0) {
@@ -26,7 +26,7 @@ function ShowInfo() {
 /**
  * Посылает AJAX - запрос по переходу на страницу редактирования контакта.
  */
-function EditContact() {
+function editContact() {
     var select = document.querySelector('select');
     var index = select.selectedIndex;
     if (index < 0) {
@@ -48,7 +48,7 @@ function EditContact() {
 /**
  * Посылает AJAX - запрос для удаления выбранного контакта.
  */
-function RemoveContact() {
+function removeContact() {
     var select = document.querySelector('select');
     var index = select.selectedIndex;
     if (index < 0) {

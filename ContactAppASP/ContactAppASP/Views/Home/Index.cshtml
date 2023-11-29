@@ -12,7 +12,7 @@
             size="5" 
             class="contactList" 
             asp-items="@(new SelectList(ViewBag.Contacts,"Name","Name"))"
-            onclick="ShowInfo()">
+            onclick="showInfo()">
         </select>
     </div>
     <div class="buttons_contact">
@@ -29,14 +29,14 @@
             width="30px" 
             height="30px" 
             class="edit" 
-            onclick="EditContact()">
+            onclick="editContact()">
         <input 
             type="image" 
             src="~/images/Remove_User_512x512.png"
             width="30px" 
             height="30px" 
             class="remove" 
-            onclick="RemoveContact()">
+            onclick="removeContact()">
     </div>
     <div class="contact_info">
         <div class="user_photo">

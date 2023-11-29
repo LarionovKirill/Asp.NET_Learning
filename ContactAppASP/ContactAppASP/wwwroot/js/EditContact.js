@@ -33,7 +33,7 @@ inputFile.addEventListener("change", uploadImage);
  *  которое происходит при обработке события.
  * @param {any} e Объект события.
  */
-function DragImage(e) {
+function dragImage(e) {
     e.preventDefault();
 }
 
@@ -46,7 +46,7 @@ dropArea.addEventListener("dragover", DragImage);
  * Метод добавляет фото в область фото.
  * @param {any} e Объект события.
  */
-function DropImage(e) {
+function dropImage(e) {
     e.preventDefault();
     inputFile.files = e.dataTransfer.files;
     uploadImage();
