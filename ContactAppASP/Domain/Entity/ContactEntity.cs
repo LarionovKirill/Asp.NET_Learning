@@ -1,4 +1,4 @@
-﻿namespace ContactDomain.Entity
+﻿namespace Contact.Domain.Entity
 {
     /// <summary>
     /// Класс представления контакта в базе данных.

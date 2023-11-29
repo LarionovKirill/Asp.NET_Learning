@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ContactDomain.Entity;
+using Contact.Domain.Entity;
 
 namespace Contact.DAL
 {
