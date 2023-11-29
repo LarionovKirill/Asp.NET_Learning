@@ -5,6 +5,14 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactAppASP", "ContactAppASP\ContactAppASP.csproj", "{C0DA5F22-3C50-438C-8873-30EDCAC5E5E2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Domain", "Domain\Contact.Domain.csproj", "{1BD72891-34B7-4CC7-892F-A21D731563CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{46894D02-0240-4832-8DD6-A1C2145DE836}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{DD52ABAC-64A4-44D3-84C6-AE0A943086FB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.DAL", "appDbContext\Contact.DAL.csproj", "{68AC9F0F-0BD0-4DA6-B7D2-1D701C514650}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +23,21 @@ Global
 		{C0DA5F22-3C50-438C-8873-30EDCAC5E5E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0DA5F22-3C50-438C-8873-30EDCAC5E5E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0DA5F22-3C50-438C-8873-30EDCAC5E5E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BD72891-34B7-4CC7-892F-A21D731563CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BD72891-34B7-4CC7-892F-A21D731563CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BD72891-34B7-4CC7-892F-A21D731563CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BD72891-34B7-4CC7-892F-A21D731563CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68AC9F0F-0BD0-4DA6-B7D2-1D701C514650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68AC9F0F-0BD0-4DA6-B7D2-1D701C514650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68AC9F0F-0BD0-4DA6-B7D2-1D701C514650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68AC9F0F-0BD0-4DA6-B7D2-1D701C514650}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1BD72891-34B7-4CC7-892F-A21D731563CB} = {46894D02-0240-4832-8DD6-A1C2145DE836}
+		{68AC9F0F-0BD0-4DA6-B7D2-1D701C514650} = {DD52ABAC-64A4-44D3-84C6-AE0A943086FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A74F35F2-B3A6-4FFB-9AB9-FA828D7EB39C}

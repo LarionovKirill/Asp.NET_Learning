@@ -1,0 +1,81 @@
+.contact_info {
+	display: grid;
+	grid-template-columns: 2fr 8fr;
+	grid-column-start: 2;
+	grid-row: 1/4;
+}
+
+.form_info {
+	font-size: 20px;
+}
+
+.form_info label {	
+	background: #fff;
+	margin: 5px;
+}
+
+.form_info input {
+	width: 99%;
+	font-size: 18px;
+	position: relative;
+	background: #fff;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 8px;
+	height: 35px;
+}
+
+.user_photo {
+	position: relative;
+	margin: 30px;
+	text-align: center;
+}
+.btn {
+	border-radius: 8px;
+	text-align: center;
+	padding: 5px;
+	margin: 10px;
+	position: relative;
+	float: right;
+	height: 30px;
+	width: 85px;
+}
+
+.hero {
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+}
+
+#drop-area {
+	width: 300px;
+	height: 200px;
+	padding: 15px;
+	background: #fff;
+	text-align: center;
+	border-radius: 20px;
+}
+
+#img-view {
+	width: 100%;
+	height: 100%;
+	background: #f7f8ff;
+	background-position: center;
+	background-size: cover;
+	border-radius: 20px;
+	object-fit: cover;
+}
+
+#img-view img {
+	width: 100px;
+	margin-top: 25px;
+}
+
+#img-view span {
+	display: block;
+	font-size: 12px;
+	color: #777;	
+	margin-top: 25px;
+}
