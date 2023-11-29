@@ -1,4 +1,4 @@
-using Contact.DAL;
+using Contact.DAL.AppDbContext;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
