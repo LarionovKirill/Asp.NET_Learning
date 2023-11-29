@@ -28,15 +28,30 @@ function uploadImage() {
 /**
  * Обработчик переноса фото.
  */
-dropArea.addEventListener("dragover", function (e) {
-    e.preventDefault();
-});
+dropArea.addEventListener("dragover", DragImage);
 
 /**
  * Обработчик отпускания фото.
  */
-dropArea.addEventListener("drop", function (e) {
+dropArea.addEventListener("drop", DropImage);
+
+
+/**
+ * Этот метод отменяет поведение браузера по умолчанию,
+ *  которое происходит при обработке события.
+ * @param {any} e Объект события.
+ */
+function DragImage(e) {
+    e.preventDefault();
+}
+
+/**
+ * Метод добавляет фото в область фото.
+ * @param {any} e Объект события.
+ */
+function DropImage(e) {
     e.preventDefault();
     inputFile.files = e.dataTransfer.files;
     uploadImage();
-});
+}
+
