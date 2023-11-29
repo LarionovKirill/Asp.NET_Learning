@@ -13,8 +13,6 @@ const inputFile = document.getElementById("input-file");
  */
 const imageView = document.getElementById("img-view");
 
-inputFile.addEventListener("change", uploadImage);
-
 /**
  * Загружает фото по url.
  */
@@ -24,6 +22,11 @@ function uploadImage() {
     imageView.textContent = "";
     imageView.style.border = 0;
 }
+
+/**
+ * Обработчик изменения изображения. 
+ */
+inputFile.addEventListener("change", uploadImage);
 
 /**
  * Этот метод отменяет поведение браузера по умолчанию,
