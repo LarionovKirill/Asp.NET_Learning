@@ -1,10 +1,3 @@
-.wrapper {
-	display: grid;
-	grid-template-columns: 2fr 9fr;
-	grid-template-rows: 1fr 18fr 1fr;
-	height: 90vh;
-}
-
 .contact_info {
 	display: grid;
 	grid-template-columns: 2fr 8fr;

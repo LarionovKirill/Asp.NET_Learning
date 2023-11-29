@@ -1,35 +1,23 @@
 ﻿/**
- * Отрисовывает добавленную картинку на странице.
+ * Место для передачи фото.
  */
-function DrawPicture() {
-    document.querySelector('[type="file"]').addEventListener('change', (e) => {
-        const elFileImg = document.querySelector('.avatar');
-        const files = e.target.files;
-        const countFiles = files.length;
-        if (!countFiles) {
-            alert('Не выбран файл!');
-            return;
-        }
-        const selectedFile = files[0];
-        if (!/^image/.test(selectedFile.type)) {
-            alert('Выбранный файл не является изображением!');
-            return;
-        }
-        const reader = new FileReader();
-        reader.readAsDataURL(selectedFile);
-        reader.addEventListener('load', (e) => {
-            elFileImg.src = e.target.result;
-            elFileImg.alt = selectedFile.name;
-        });
-    });
-}
-
 const dropArea = document.getElementById("drop-area");
+
+/**
+ * Переданный файл.
+ */ 
 const inputFile = document.getElementById("input-file");
+
+/**
+ * Отображение файла на странице.
+ */
 const imageView = document.getElementById("img-view");
 
 inputFile.addEventListener("change", uploadImage);
 
+/**
+ * Загружает фото по url.
+ */
 function uploadImage() {
     let imgLink = URL.createObjectURL(inputFile.files[0]);
     imageView.style.backgroundImage = `url(${imgLink})`;
@@ -37,10 +25,16 @@ function uploadImage() {
     imageView.style.border = 0;
 }
 
+/**
+ * Обработчик переноса фото.
+ */
 dropArea.addEventListener("dragover", function (e) {
     e.preventDefault();
 });
 
+/**
+ * Обработчик отпускания фото.
+ */
 dropArea.addEventListener("drop", function (e) {
     e.preventDefault();
     inputFile.files = e.dataTransfer.files;
