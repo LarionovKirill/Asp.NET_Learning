@@ -40,7 +40,7 @@ function dragImage(e) {
 /**
  * Обработчик переноса фото.
  */
-dropArea.addEventListener("dragover", DragImage);
+dropArea.addEventListener("dragover", dragImage);
 
 /**
  * Метод добавляет фото в область фото.
@@ -55,4 +55,4 @@ function dropImage(e) {
 /**
  * Обработчик отпускания фото.
  */
-dropArea.addEventListener("drop", DropImage);
+dropArea.addEventListener("drop", dropImage);
