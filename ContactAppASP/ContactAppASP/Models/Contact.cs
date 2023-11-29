@@ -21,7 +21,7 @@
         public string Phone { get; set; }
 
         /// <summary>
-        /// Создает экземпляр класса <see cref="Contact"/>
+        /// Создает экземпляр класса <see cref="Contact"/>.
         /// </summary>
         public Contact()
         {
@@ -29,7 +29,7 @@
         }
 
         /// <summary>
-        /// Конструктор класса <see cref="Contact"/>.
+        /// Создает экземпляр класса <see cref="Contact"/>.
         /// </summary>
         /// <param name="name">Имя контакта.</param>
         /// <param name="email">Email контакта.</param>
