@@ -1,15 +1,15 @@
 ﻿/**
- * Место для передачи фото.
+ * Хранит объект для передачи фото.
  */
 const dropArea = document.getElementById("drop-area");
 
 /**
- * Переданный файл.
+ * Хранит объект, хранящий переданный файл.
  */ 
 const inputFile = document.getElementById("input-file");
 
 /**
- * Отображение файла на странице.
+ *Хранит объект для отображения файла на странице.
  */
 const imageView = document.getElementById("img-view");
 
