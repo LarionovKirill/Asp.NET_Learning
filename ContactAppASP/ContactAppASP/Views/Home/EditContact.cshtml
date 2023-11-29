@@ -1,18 +1,15 @@
-﻿<link rel="stylesheet" href="~/css/CreateStyle.css" asp-append-version="true">
+﻿<link rel="stylesheet" href="~/css/EditStyle.css" asp-append-version="true">
 <form asp-controller="home">
     <div class="contact_info">
-        <div class="user_photo">
-            <img 
-                src="~/images/User_Avatar_512x512.png" 
-                width="250px"
-                height="160px" 
-                class="avatar">
-            <input 
-                type="file" 
-                class="inputFile" 
-                name='photo'
-                accept="image/*" 
-                onclick="DrawPicture()">
+        <div class="hero">
+            <label for="input-file" id="drop-area">
+                <input type="file" accept="image/*" id="input-file" hidden>
+                <div id="img-view">
+                    <img src="~/images/User_Avatar_512x512.png">
+                    <p>Перетащи свое фото или нажми сюда<br>для загрузки фото.</p>
+                    <span>Загрузи фото со своего устройства.</span>
+                </div>
+            </label>
         </div>
         <div class="form_info">
             <label>Имя:</label>
@@ -21,8 +18,8 @@
             <input class="phone" type="search" name='number' value="@ViewData["phone"]">
             <label>Email:</label>
             <input class="email" type="search" name='email' value="@ViewData["email"]">
-            <button class="btn" asp-action="SaveEditContact">Сохранить</button>
             <button class="btn" asp-action="CancelAction">Отмена</button>
+            <button class="btn" asp-action="SaveEditContact">Сохранить</button>
         </div>
     </div>
 </form>
