@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ContactAppASP.Models;
+using Contact.DAL.AppDbContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContactAppASP.Controllers
 {
@@ -14,15 +16,22 @@ namespace ContactAppASP.Controllers
         /// </summary>
         private List<Models.Contact> contacts = ContactList.GetList();
 
+        private AppDbContext Db { get; set; }
+
+        public HomeController(AppDbContext db)
+        {
+            Db = db;
+            Console.WriteLine(db);
+        }
+
         /// <summary>
         /// Запрос главной страницы.
         /// </summary>
         /// <returns>Возвращает главную страница.</returns>
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            ViewBag.Contacts = ContactList.GetList();
-            return View();
+            return View(await Db.Contacts.ToListAsync());
         }
 
         /// <summary>

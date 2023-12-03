@@ -1,4 +1,4 @@
-﻿@model List<Contact>
+﻿@model IEnumerable<Contact.Domain.Entity.ContactEntity>
 @{
     ViewData["Title"] = "Home page";
 }
@@ -11,8 +11,14 @@
         <select 
             size="5" 
             class="contactList" 
-            asp-items="@(new SelectList(ViewBag.Contacts,"Name","Name"))"
             onclick="showInfo()">
+            @foreach(var contact in Model)
+            {
+                <option 
+                    id="@contact.Id"
+                    onclick="showInfo()">
+                    @contact.Name</option>
+            }
         </select>
     </div>
     <div class="buttons_contact">

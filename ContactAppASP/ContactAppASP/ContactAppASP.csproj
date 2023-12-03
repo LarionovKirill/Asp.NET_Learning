@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\appDbContext\Contact.DAL.csproj" />
+    <ProjectReference Include="..\Domain\Contact.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
