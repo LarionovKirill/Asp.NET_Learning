@@ -23,4 +23,8 @@
     <ProjectReference Include="..\appDbContext\Contact.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Files\" />
+  </ItemGroup>
+
 </Project>

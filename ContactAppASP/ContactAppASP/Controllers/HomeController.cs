@@ -89,8 +89,9 @@ namespace ContactAppASP.Controllers
         /// <param name="email">Измененный Email.</param>
         /// <returns>Возвращает на главную страницу с исправленным контактом.</returns>
         [HttpPost]
-        public IActionResult SaveEditContact(string name, string number, string email)
+        public async Task<IActionResult> SaveEditContact(string name, string number, string email, IFormFile photo)
         {
+            Console.WriteLine(photo);
             if (ContactList.SelectedIndex < 0)
             {
                 var newContact = new Models.Contact(name, email, number);

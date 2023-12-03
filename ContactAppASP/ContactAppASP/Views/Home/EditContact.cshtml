@@ -1,9 +1,9 @@
 ﻿<link rel="stylesheet" href="~/css/EditStyle.css" asp-append-version="true">
-<form asp-controller="home">
+<form asp-controller="home" enctype="multipart/form-data" asp-action="SaveEditContact">
     <div class="contact_info">
         <div class="hero">
             <label for="input-file" id="drop-area">
-                <input type="file" accept="image/*" id="input-file" hidden>
+                <input type="file" accept="image/*" id="input-file" hidden name="photo">
                 <div id="img-view">
                     <img src="~/images/User_Avatar_512x512.png">
                     <p>Перетащи свое фото или нажми сюда<br>для загрузки фото.</p>
