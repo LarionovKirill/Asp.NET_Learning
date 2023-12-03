@@ -48,6 +48,7 @@ namespace ContactAppASP.Controllers
             ViewData["phone"] = contact.Phone;
             ViewData["email"] = contact.Email;
             ViewBag.Contacts = ContactList.GetList();
+            ContactList.SelectedIndex = index;
             return View("Index");
         }
 
@@ -61,6 +62,7 @@ namespace ContactAppASP.Controllers
         {
             ContactList.RemoveInList(index);
             ViewBag.Contacts = ContactList.GetList();
+            ContactList.SelectedIndex = -1;
             return View("Index");
         }
 
@@ -72,11 +74,10 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult EditContact(int index)
         {
-            var selectedContact = ContactList.GetContact(index);
+            var selectedContact = ContactList.GetContact(ContactList.SelectedIndex);
             ViewData["name"] = selectedContact.Name;
             ViewData["phone"] = selectedContact.Phone;
             ViewData["email"] = selectedContact.Email;
-            ContactList.SelectedIndex = index;
             return View();
         }
 
