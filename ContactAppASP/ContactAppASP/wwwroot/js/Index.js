@@ -12,7 +12,7 @@ function showInfo() {
     }
     $.ajax({
         method: "GET",
-        url: "Home/GetContact?id=" + id,
+        url: "Contact/GetContact?id=" + id,
         success: function (data) {
             $(".container").html(data);
             select = document.querySelector('select');
@@ -36,7 +36,7 @@ function removeContact() {
     }
     $.ajax({
         method: "GET",
-        url: "Home/RemoveContact?id=" + id,
+        url: "Contact/RemoveContact?id=" + id,
         success: function (data) {
             $(".container").html(data);
         },

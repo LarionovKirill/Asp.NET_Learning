@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ContactAppASP.Models;
 using Contact.DAL.AppDbContext;
 using Microsoft.EntityFrameworkCore;
 using ContactAppASP.Services;
@@ -9,14 +8,14 @@ namespace ContactAppASP.Controllers
     /// <summary>
     /// Главный контроллер.
     /// </summary>
-    public class HomeController : Controller
+    public class ContactController : Controller
     {
         /// <summary>
         /// База данных.
         /// </summary>
         private AppDbContext Db { get; set; }
 
-        public HomeController(AppDbContext db)
+        public ContactController(AppDbContext db)
         {
             Db = db;
         }
