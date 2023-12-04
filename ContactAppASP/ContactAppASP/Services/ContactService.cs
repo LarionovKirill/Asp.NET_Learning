@@ -5,6 +5,11 @@ namespace ContactAppASP.Services
     public static class ContactService
     {
         /// <summary>
+        /// Выбранный Id.
+        /// </summary>
+        public static int SelectedId { get; set; }
+
+        /// <summary>
         /// Метод создания контакта для передачи его в базу данных.
         /// </summary>
         /// <param name="name">Имя контакта.</param>

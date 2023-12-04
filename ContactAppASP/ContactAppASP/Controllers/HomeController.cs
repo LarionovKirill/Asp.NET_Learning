@@ -18,12 +18,14 @@ namespace ContactAppASP.Controllers
         /// </summary>
         private List<Models.Contact> contacts = ContactList.GetList();
 
+        /// <summary>
+        /// База данных.
+        /// </summary>
         private AppDbContext Db { get; set; }
 
         public HomeController(AppDbContext db)
         {
             Db = db;
-            Console.WriteLine(db);
         }
 
         /// <summary>
@@ -43,13 +45,14 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult AddContact()
         {
+            ContactService.SelectedId = -1;
             return View("EditContact");
         }
 
         /// <summary>
         /// Запрос на вывод выбранного пользователем контакта.
         /// </summary>
-        /// <param name="index">Переданный индекс контакта в базе.</param>
+        /// <param name="id">Переданный id контакта в базе.</param>
         /// <returns>Возвращает представление с информацией о контакте.</returns>
         [HttpGet]
         public async Task<IActionResult> GetContact(int id)
@@ -58,36 +61,43 @@ namespace ContactAppASP.Controllers
             ViewData["name"] = contact.Name;
             ViewData["phone"] = contact.Phone;
             ViewData["email"] = contact.Email;
-            ContactList.SelectedIndex = id;
+            ContactService.SelectedId = id;
             return View("Index", await Db.Contacts.ToListAsync());
         }
 
         /// <summary>
         /// Запрос на удаление выбранного пользователем контакта.
         /// </summary>
-        /// <param name="index">Переданный индекс контакта в базе.</param>
+        /// <param name="id">Id контакта в базе.</param>
         /// <returns>Возвращает представление с удаленным контактом.</returns>
         [HttpGet]
-        public IActionResult RemoveContact(int index)
+        public async Task<IActionResult> RemoveContact(int id)
         {
-            ContactList.RemoveInList(index);
-            ViewBag.Contacts = ContactList.GetList();
-            ContactList.SelectedIndex = -1;
-            return View("Index");
+            var contact = Db.Contacts.FirstOrDefault(x => x.Id == id);
+            if (contact != null) 
+            {
+                Db.Contacts.Remove(contact);
+                Db.SaveChanges();
+            }
+            ContactService.SelectedId = -1;
+            return View("Index", await Db.Contacts.ToListAsync());
         }
 
         /// <summary>
         /// Запрос на удаление выбранного пользователем контакта.
         /// </summary>
-        /// <param name="index">Переданный индекс контакта в базе.</param>
+        /// <param name="id">Переданный id контакта в базе.</param>
         /// <returns>Возвращает представление с удаленным контактом.</returns>
         [HttpGet]
-        public IActionResult EditContact(int index)
+        public IActionResult EditContact()
         {
-            var selectedContact = ContactList.GetContact(ContactList.SelectedIndex);
-            ViewData["name"] = selectedContact.Name;
-            ViewData["phone"] = selectedContact.Phone;
-            ViewData["email"] = selectedContact.Email;
+            var contact = Db.Contacts.FirstOrDefault(x => x.Id == ContactService.SelectedId);
+            if (contact != null) 
+            {
+                ViewData["name"] = contact.Name;
+                ViewData["phone"] = contact.Phone;
+                ViewData["email"] = contact.Email;
+            }
             return View();
         }
 
@@ -105,22 +115,30 @@ namespace ContactAppASP.Controllers
             string email, 
             IFormFile photo)
         {
-            if (ContactList.SelectedIndex < 0)
+            if (ContactService.SelectedId < 0)
             {
-                var contact = ContactService.AddContact(name, number, email, photo);
-                Db.Contacts.Add(contact);
+                var saveContact = ContactService.AddContact(name, number, email, photo);
+                Db.Contacts.Add(saveContact);
                 Db.SaveChanges();
-                /*var newContact = new Models.Contact(name, email, number);
-                ContactList.AddToList(newContact);*/
                 return RedirectToAction("Index");
             }
 
-            var contacts = ContactList.GetList();
-            ViewBag.Index = ViewData["index"];
-            contacts[ContactList.SelectedIndex].Name = name;
-            contacts[ContactList.SelectedIndex].Phone = number;
-            contacts[ContactList.SelectedIndex].Email = email;
-            ContactList.SelectedIndex = -1;
+            var editContact = Db.Contacts.FirstOrDefault(x => x.Id == ContactService.SelectedId);
+            if (editContact != null)
+            {
+                editContact.Name = name;
+                editContact.Phone = number;
+                editContact.Email = email;
+                byte[] imageData = null;
+                using (var binaryReader = new BinaryReader(photo.OpenReadStream()))
+                {
+                    imageData = binaryReader.ReadBytes((int)photo.Length);
+                }
+                editContact.Photo = imageData;
+                Db.Contacts.Update(editContact);
+                Db.SaveChanges();
+            }
+            ContactService.SelectedId = -1;
             return RedirectToAction("Index");
         }
 
