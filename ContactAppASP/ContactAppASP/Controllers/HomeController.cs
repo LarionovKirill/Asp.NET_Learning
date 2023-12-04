@@ -2,6 +2,8 @@
 using ContactAppASP.Models;
 using Contact.DAL.AppDbContext;
 using Microsoft.EntityFrameworkCore;
+using ContactAppASP.Services;
+using System;
 
 namespace ContactAppASP.Controllers
 {
@@ -50,15 +52,14 @@ namespace ContactAppASP.Controllers
         /// <param name="index">Переданный индекс контакта в базе.</param>
         /// <returns>Возвращает представление с информацией о контакте.</returns>
         [HttpGet]
-        public IActionResult GetContact(int index)
+        public async Task<IActionResult> GetContact(int id)
         {
-            var contact = ContactList.GetContact(index);
+            var contact = Db.Contacts.FirstOrDefault(x => x.Id == id);
             ViewData["name"] = contact.Name;
             ViewData["phone"] = contact.Phone;
             ViewData["email"] = contact.Email;
-            ViewBag.Contacts = ContactList.GetList();
-            ContactList.SelectedIndex = index;
-            return View("Index");
+            ContactList.SelectedIndex = id;
+            return View("Index", await Db.Contacts.ToListAsync());
         }
 
         /// <summary>
@@ -98,13 +99,19 @@ namespace ContactAppASP.Controllers
         /// <param name="email">Измененный Email.</param>
         /// <returns>Возвращает на главную страницу с исправленным контактом.</returns>
         [HttpPost]
-        public async Task<IActionResult> SaveEditContact(string name, string number, string email, IFormFile photo)
+        public IActionResult SaveEditContact(
+            string name, 
+            string number, 
+            string email, 
+            IFormFile photo)
         {
-            Console.WriteLine(photo);
             if (ContactList.SelectedIndex < 0)
             {
-                var newContact = new Models.Contact(name, email, number);
-                ContactList.AddToList(newContact);
+                var contact = ContactService.AddContact(name, number, email, photo);
+                Db.Contacts.Add(contact);
+                Db.SaveChanges();
+                /*var newContact = new Models.Contact(name, email, number);
+                ContactList.AddToList(newContact);*/
                 return RedirectToAction("Index");
             }
 
