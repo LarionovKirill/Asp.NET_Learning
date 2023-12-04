@@ -29,14 +29,14 @@ function showInfo() {
  */
 function removeContact() {
     var select = document.querySelector('select');
-    var index = select.selectedIndex;
-    if (index < 0) {
+    var id = select[select.selectedIndex].id;
+    if (id < 0) {
         alert('Выберите пользователя');
         return;
     }
     $.ajax({
         method: "GET",
-        url: "Home/RemoveContact?index=" + index,
+        url: "Home/RemoveContact?id=" + id,
         success: function (data) {
             $(".container").html(data);
         },
