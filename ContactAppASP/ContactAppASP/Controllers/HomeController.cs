@@ -13,12 +13,6 @@ namespace ContactAppASP.Controllers
     public class HomeController : Controller
     {
         /// <summary>
-        /// Список контактов в базе.
-        /// Будет заменен потом на БД.
-        /// </summary>
-        private List<Models.Contact> contacts = ContactList.GetList();
-
-        /// <summary>
         /// База данных.
         /// </summary>
         private AppDbContext Db { get; set; }
