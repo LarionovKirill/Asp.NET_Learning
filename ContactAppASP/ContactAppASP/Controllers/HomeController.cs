@@ -3,7 +3,6 @@ using ContactAppASP.Models;
 using Contact.DAL.AppDbContext;
 using Microsoft.EntityFrameworkCore;
 using ContactAppASP.Services;
-using System;
 
 namespace ContactAppASP.Controllers
 {
@@ -40,7 +39,7 @@ namespace ContactAppASP.Controllers
         public IActionResult AddContact()
         {
             ContactService.SelectedId = -1;
-            return View("EditContact");
+            return View("AddEditContact");
         }
 
         /// <summary>
@@ -55,6 +54,8 @@ namespace ContactAppASP.Controllers
             ViewData["name"] = contact.Name;
             ViewData["phone"] = contact.Phone;
             ViewData["email"] = contact.Email;
+            ViewData["photo"] = "data:image/png;base64,"
+                    + Convert.ToBase64String(contact.Photo);
             ContactService.SelectedId = id;
             return View("Index", await Db.Contacts.ToListAsync());
         }
@@ -91,8 +92,10 @@ namespace ContactAppASP.Controllers
                 ViewData["name"] = contact.Name;
                 ViewData["phone"] = contact.Phone;
                 ViewData["email"] = contact.Email;
+                ViewData["photo"] = "data:image/png;base64," 
+                    + Convert.ToBase64String(contact.Photo);
             }
-            return View();
+            return View("AddEditContact");
         }
 
         /// <summary>

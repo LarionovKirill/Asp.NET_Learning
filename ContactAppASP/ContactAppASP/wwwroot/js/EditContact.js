@@ -13,6 +13,7 @@ const inputFile = document.getElementById("input-file");
  */
 const imageView = document.getElementById("img-view");
 
+
 /**
  * Загружает фото по url.
  */
@@ -56,3 +57,17 @@ function dropImage(e) {
  * Обработчик отпускания фото.
  */
 dropArea.addEventListener("drop", dropImage);
+
+imageView.addEventListener("change", test);
+
+if (imageView.style.backgroundImage.length > 0)
+{
+    imageView.style.backgroundImage = `url(${imgLink})`;
+    imageView.textContent = "";
+    imageView.style.border = 0;
+}
+
+function test()
+{
+    console.log(1);
+}
