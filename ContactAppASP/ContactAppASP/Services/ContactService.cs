@@ -24,12 +24,15 @@ namespace ContactAppASP.Services
             IFormFile photo)
         {
             var contact = new ContactEntity { Name = name, Phone = phone, Email = email };
-            byte[] imageData = null;
-            using (var binaryReader = new BinaryReader(photo.OpenReadStream()))
+            if (photo != null)
             {
-                imageData = binaryReader.ReadBytes((int)photo.Length);
+                byte[] imageData = null;
+                using (var binaryReader = new BinaryReader(photo.OpenReadStream()))
+                {
+                    imageData = binaryReader.ReadBytes((int)photo.Length);
+                }
+                contact.Photo = imageData;
             }
-            contact.Photo = imageData;
             return contact;
         }
     }

@@ -115,7 +115,7 @@ namespace ContactAppASP.Controllers
             string name, 
             string number, 
             string email, 
-            IFormFile photo)
+            IFormFile photo = null)
         {
             if (ContactService.SelectedId < 0)
             {
@@ -128,7 +128,12 @@ namespace ContactAppASP.Controllers
             var editContact = _database.GetContact(ContactService.SelectedId);
             if (editContact != null)
             {
+                byte[] copyPhoto = editContact.Photo;
                 editContact = ContactService.AddContact(name, number, email, photo);
+                if (copyPhoto != editContact.Photo)
+                {
+                    editContact.Photo = copyPhoto;
+                }
                 _database.Update(editContact, ContactService.SelectedId);
                 _database.SaveChanges();
             }
