@@ -3,7 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Contact.DAL.Repository
 {
-    internal class SQLContactRepository : IRepository<ContactEntity>
+    /// <summary>
+    /// Интерфейс базы данных MS SQL.
+    /// </summary>
+    public class SQLContactRepository : IRepository<ContactEntity>
     {
         /// <summary>
         /// Параметр освобождения ресурсов.

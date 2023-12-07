@@ -2,7 +2,11 @@
 
 namespace Contact.DAL.Repository
 {
-    internal interface IRepository<T>: IDisposable
+    /// <summary>
+    /// Обобщенный интерфейс взаимодействия с базой данных.
+    /// </summary>
+    /// <typeparam name="T">Тип данных параметра.</typeparam>
+    public interface IRepository<T>: IDisposable
     {
         /// <summary>
         /// Получение списка контактов.

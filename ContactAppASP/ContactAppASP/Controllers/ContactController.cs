@@ -2,6 +2,8 @@
 using Contact.DAL.AppDbContext;
 using Microsoft.EntityFrameworkCore;
 using ContactAppASP.Services;
+using Contact.DAL.Repository;
+using Contact.Domain.Entity;
 
 namespace ContactAppASP.Controllers
 {
@@ -13,7 +15,7 @@ namespace ContactAppASP.Controllers
         /// <summary>
         /// База данных.
         /// </summary>
-        private AppDbContext _database;
+        private IRepository<ContactEntity> _database;
 
         /// <summary>
         /// Конструктор контроллера <see cref="ContactController"/>.
@@ -21,7 +23,7 @@ namespace ContactAppASP.Controllers
         /// <param name="db">База данных.</param>
         public ContactController(AppDbContext db)
         {
-            _database = db;
+            _database = new SQLContactRepository(db);
         }
 
         /// <summary>
@@ -29,9 +31,9 @@ namespace ContactAppASP.Controllers
         /// </summary>
         /// <returns>Возвращает главную страница.</returns>
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _database.Contacts.ToListAsync());
+            return View(_database.GetContacts());
         }
 
         /// <summary>
@@ -51,16 +53,16 @@ namespace ContactAppASP.Controllers
         /// <param name="id">Переданный id контакта в базе.</param>
         /// <returns>Возвращает представление с информацией о контакте.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetContact(int id)
+        public IActionResult GetContact(int id)
         {
-            var contact = _database.Contacts.FirstOrDefault(x => x.Id == id);
+            var contact = _database.GetContact(id);
             ViewData["name"] = contact.Name;
             ViewData["phone"] = contact.Phone;
             ViewData["email"] = contact.Email;
             ViewData["photo"] = "data:image/png;base64,"
                     + Convert.ToBase64String(contact.Photo);
             ContactService.SelectedId = id;
-            return View("Index", await _database.Contacts.ToListAsync());
+            return View("Index", _database.GetContacts());
         }
 
         /// <summary>
@@ -69,16 +71,11 @@ namespace ContactAppASP.Controllers
         /// <param name="id">Id контакта в базе.</param>
         /// <returns>Возвращает представление с удаленным контактом.</returns>
         [HttpGet]
-        public async Task<IActionResult> RemoveContact(int id)
+        public IActionResult RemoveContact(int id)
         {
-            var contact = _database.Contacts.FirstOrDefault(x => x.Id == id);
-            if (contact != null) 
-            {
-                _database.Contacts.Remove(contact);
-                _database.SaveChanges();
-            }
+            _database.Delete(id);
             ContactService.SelectedId = -1;
-            return View("Index", await _database.Contacts.ToListAsync());
+            return View("Index", _database.GetContacts());
         }
 
         /// <summary>
@@ -91,7 +88,7 @@ namespace ContactAppASP.Controllers
         {
             if (ContactService.SelectedId > 0)
             {
-                var contact = _database.Contacts.FirstOrDefault(x => x.Id == ContactService.SelectedId);
+                var contact = _database.GetContact(ContactService.SelectedId);
                 if (contact != null)
                 {
                     ViewData["name"] = contact.Name;
@@ -123,12 +120,12 @@ namespace ContactAppASP.Controllers
             if (ContactService.SelectedId < 0)
             {
                 var saveContact = ContactService.AddContact(name, number, email, photo);
-                _database.Contacts.Add(saveContact);
+                _database.Create(saveContact);
                 _database.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            var editContact = _database.Contacts.FirstOrDefault(x => x.Id == ContactService.SelectedId);
+            var editContact = _database.GetContact(ContactService.SelectedId);
             if (editContact != null)
             {
                 editContact.Name = name;
@@ -140,7 +137,7 @@ namespace ContactAppASP.Controllers
                     imageData = binaryReader.ReadBytes((int)photo.Length);
                 }
                 editContact.Photo = imageData;
-                _database.Contacts.Update(editContact);
+                _database.Update(editContact);
                 _database.SaveChanges();
             }
             ContactService.SelectedId = -1;
