@@ -16,7 +16,7 @@ namespace ContactAppASP.Services
         /// <param name="phone">Номер телефона контакта.</param>
         /// <param name="email">Email контатка.</param>
         /// <param name="photo">Фото контакта.</param>
-        /// <returns>Готовый контакт типа <see cref="ContactEntity"/>.</returns>
+        /// <returns>Возвращает контакт типа <see cref="ContactEntity"/>.</returns>
         public static ContactEntity AddContact(
             string name,
             string phone, 
