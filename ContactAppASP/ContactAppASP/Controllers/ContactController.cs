@@ -129,7 +129,7 @@ namespace ContactAppASP.Controllers
             if (editContact != null)
             {
                 editContact = ContactService.AddContact(name, number, email, photo);
-                _database.Update(editContact);
+                _database.Update(editContact, ContactService.SelectedId);
                 _database.SaveChanges();
             }
             ContactService.SelectedId = -1;
@@ -145,6 +145,12 @@ namespace ContactAppASP.Controllers
         {
             ContactService.SelectedId = -1;
             return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _database.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

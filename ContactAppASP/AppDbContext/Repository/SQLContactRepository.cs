@@ -105,9 +105,10 @@ namespace Contact.DAL.Repository
         /// Изменение контакта.
         /// </summary>
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
-        public void Update(ContactEntity contact)
+        public void Update(ContactEntity contact, int id)
         {
-            _database.Entry(contact).State = EntityState.Modified;
+            var editContact = _database.Contacts.FirstOrDefault(x => x.Id == id);
+            editContact.Clone(contact);
         }
     }
 }
