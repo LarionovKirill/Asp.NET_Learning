@@ -128,15 +128,7 @@ namespace ContactAppASP.Controllers
             var editContact = _database.GetContact(ContactService.SelectedId);
             if (editContact != null)
             {
-                editContact.Name = name;
-                editContact.Phone = number;
-                editContact.Email = email;
-                byte[] imageData = null;
-                using (var binaryReader = new BinaryReader(photo.OpenReadStream()))
-                {
-                    imageData = binaryReader.ReadBytes((int)photo.Length);
-                }
-                editContact.Photo = imageData;
+                editContact = ContactService.AddContact(name, number, email, photo);
                 _database.Update(editContact);
                 _database.SaveChanges();
             }
