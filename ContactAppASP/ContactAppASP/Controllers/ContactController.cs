@@ -89,16 +89,20 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult EditContact()
         {
-            var contact = _database.Contacts.FirstOrDefault(x => x.Id == ContactService.SelectedId);
-            if (contact != null) 
+            if (ContactService.SelectedId > 0)
             {
-                ViewData["name"] = contact.Name;
-                ViewData["phone"] = contact.Phone;
-                ViewData["email"] = contact.Email;
-                ViewData["photo"] = "data:image/png;base64," 
-                    + Convert.ToBase64String(contact.Photo);
+                var contact = _database.Contacts.FirstOrDefault(x => x.Id == ContactService.SelectedId);
+                if (contact != null)
+                {
+                    ViewData["name"] = contact.Name;
+                    ViewData["phone"] = contact.Phone;
+                    ViewData["email"] = contact.Email;
+                    ViewData["photo"] = "data:image/png;base64,"
+                        + Convert.ToBase64String(contact.Photo);
+                }
+                return View("AddEditContact");
             }
-            return View("AddEditContact");
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -150,6 +154,7 @@ namespace ContactAppASP.Controllers
         [HttpPost]
         public IActionResult CancelAction()
         {
+            ContactService.SelectedId = -1;
             return RedirectToAction("Index");
         }
     }
