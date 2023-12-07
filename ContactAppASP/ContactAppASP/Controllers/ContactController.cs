@@ -100,9 +100,10 @@ namespace ContactAppASP.Controllers
         /// <summary>
         /// Присваивает новые значения контакту.
         /// </summary>
-        /// <param name="name">Измененное имя.</param>
-        /// <param name="number">Измененный номер.</param>
-        /// <param name="email">Измененный Email.</param>
+        /// <param name="name">Имя.</param>
+        /// <param name="number">Номер.</param>
+        /// <param name="email">Email.</param>
+        /// <param name="photo">Фото.</param>
         /// <returns>Возвращает на главную страницу с исправленным контактом.</returns>
         [HttpPost]
         public IActionResult SaveEditContact(
