@@ -4,9 +4,7 @@
         <div class="hero">
             <label for="input-file" id="drop-area">
                 <input type="file" accept="image/*" id="input-file" hidden name="photo">
-                <div style="background-image: url(@ViewData["photo"])"
-                     id="img-view">
-                </div>
+                <img id="img-view" src="@ViewData["photo"]">
                 <p>Перетащи свое фото или нажми сюда<br>для загрузки фото.</p>
             </label>
         </div>
