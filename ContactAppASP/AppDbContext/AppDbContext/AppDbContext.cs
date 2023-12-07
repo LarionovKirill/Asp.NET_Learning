@@ -14,7 +14,7 @@ namespace Contact.DAL.AppDbContext
         public DbSet<ContactEntity> Contacts { get; set; } = null!;
 
         /// <summary>
-        /// Метод инициализации базы данных.
+        /// Конструктор базы данных.
         /// </summary>
         /// <param name="options">Параметры базы данных.</param>
         public AppDbContext(DbContextOptions options) : base(options)
