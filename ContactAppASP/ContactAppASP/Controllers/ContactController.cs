@@ -15,6 +15,10 @@ namespace ContactAppASP.Controllers
         /// </summary>
         private AppDbContext _database;
 
+        /// <summary>
+        /// Конструктор контроллера <see cref="ContactController"/>.
+        /// </summary>
+        /// <param name="db">База данных.</param>
         public ContactController(AppDbContext db)
         {
             _database = db;
