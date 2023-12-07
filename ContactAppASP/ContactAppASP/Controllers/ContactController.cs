@@ -13,11 +13,11 @@ namespace ContactAppASP.Controllers
         /// <summary>
         /// База данных.
         /// </summary>
-        private AppDbContext Db { get; set; }
+        private AppDbContext _database;
 
         public ContactController(AppDbContext db)
         {
-            Db = db;
+            _database = db;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await Db.Contacts.ToListAsync());
+            return View(await _database.Contacts.ToListAsync());
         }
 
         /// <summary>
@@ -49,14 +49,14 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public async Task<IActionResult> GetContact(int id)
         {
-            var contact = Db.Contacts.FirstOrDefault(x => x.Id == id);
+            var contact = _database.Contacts.FirstOrDefault(x => x.Id == id);
             ViewData["name"] = contact.Name;
             ViewData["phone"] = contact.Phone;
             ViewData["email"] = contact.Email;
             ViewData["photo"] = "data:image/png;base64,"
                     + Convert.ToBase64String(contact.Photo);
             ContactService.SelectedId = id;
-            return View("Index", await Db.Contacts.ToListAsync());
+            return View("Index", await _database.Contacts.ToListAsync());
         }
 
         /// <summary>
@@ -67,14 +67,14 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public async Task<IActionResult> RemoveContact(int id)
         {
-            var contact = Db.Contacts.FirstOrDefault(x => x.Id == id);
+            var contact = _database.Contacts.FirstOrDefault(x => x.Id == id);
             if (contact != null) 
             {
-                Db.Contacts.Remove(contact);
-                Db.SaveChanges();
+                _database.Contacts.Remove(contact);
+                _database.SaveChanges();
             }
             ContactService.SelectedId = -1;
-            return View("Index", await Db.Contacts.ToListAsync());
+            return View("Index", await _database.Contacts.ToListAsync());
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult EditContact()
         {
-            var contact = Db.Contacts.FirstOrDefault(x => x.Id == ContactService.SelectedId);
+            var contact = _database.Contacts.FirstOrDefault(x => x.Id == ContactService.SelectedId);
             if (contact != null) 
             {
                 ViewData["name"] = contact.Name;
@@ -114,12 +114,12 @@ namespace ContactAppASP.Controllers
             if (ContactService.SelectedId < 0)
             {
                 var saveContact = ContactService.AddContact(name, number, email, photo);
-                Db.Contacts.Add(saveContact);
-                Db.SaveChanges();
+                _database.Contacts.Add(saveContact);
+                _database.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            var editContact = Db.Contacts.FirstOrDefault(x => x.Id == ContactService.SelectedId);
+            var editContact = _database.Contacts.FirstOrDefault(x => x.Id == ContactService.SelectedId);
             if (editContact != null)
             {
                 editContact.Name = name;
@@ -131,8 +131,8 @@ namespace ContactAppASP.Controllers
                     imageData = binaryReader.ReadBytes((int)photo.Length);
                 }
                 editContact.Photo = imageData;
-                Db.Contacts.Update(editContact);
-                Db.SaveChanges();
+                _database.Contacts.Update(editContact);
+                _database.SaveChanges();
             }
             ContactService.SelectedId = -1;
             return RedirectToAction("Index");
