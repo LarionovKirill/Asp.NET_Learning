@@ -11,7 +11,7 @@ namespace Contact.DAL.AppDbContext
         /// <summary>
         /// Список контактов в базе данных.
         /// </summary>
-        public DbSet<ContactEntity> Contacts { get; set; } = null!;
+        public DbSet<ContactEntity> Contacts { get; set; }
 
         /// <summary>
         /// Конструктор базы данных.
