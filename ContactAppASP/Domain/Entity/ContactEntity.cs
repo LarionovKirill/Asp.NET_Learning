@@ -3,7 +3,7 @@
     /// <summary>
     /// Класс представления контакта в базе данных.
     /// </summary>
-    public class ContactEntity
+    public class ContactEntity: IComparable<ContactEntity>
     {
         /// <summary>
         /// Id контакта.
@@ -40,6 +40,21 @@
             Email = contact.Email;
             Phone = contact.Phone;
             Photo = contact.Photo;
+        }
+
+        /// <summary>
+        /// Метод сравнения по полю класса <see cref= "ContactEntity"/>.
+        /// </summary>
+        /// <param name="other">Сравниваемый объект.</param>
+        /// <returns>Критерий для сортировки методом Sort().</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public int CompareTo(ContactEntity? other)
+        {
+            if (other is ContactEntity)
+            {
+                return Name.CompareTo(other.Name);
+            }
+            throw new ArgumentException("Некорректное значение параметра");
         }
     }
 }
