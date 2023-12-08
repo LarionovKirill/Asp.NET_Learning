@@ -3,7 +3,7 @@
     /// <summary>
     /// Класс представления контакта в базе данных.
     /// </summary>
-    public class ContactEntity: IComparable<ContactEntity>
+    public class ContactEntity
     {
         /// <summary>
         /// Id контакта.
