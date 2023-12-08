@@ -5,13 +5,14 @@
 function showInfo() {
     var select = document.querySelector('select');
     var index = select.selectedIndex;
-    if (index < 0) {
+    var id = select[select.selectedIndex].id;
+    if (id < 0) {
         alert('Выберите пользователя');
         return;
     }
     $.ajax({
         method: "GET",
-        url: "Home/GetContact?index=" + index,
+        url: "Contact/GetContact?id=" + id,
         success: function (data) {
             $(".container").html(data);
             select = document.querySelector('select');
@@ -24,40 +25,18 @@ function showInfo() {
 }
 
 /**
- * Посылает AJAX - запрос по переходу на страницу редактирования контакта.
- */
-function editContact() {
-    var select = document.querySelector('select');
-    var index = select.selectedIndex;
-    if (index < 0) {
-        alert('Выберите пользователя');
-        return;
-    }
-    $.ajax({
-        method: "GET",
-        url: "Home/EditContact?index=" + index,
-        success: function (data) {
-            $(".container").html(data);
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    })
-}
-
-/**
  * Посылает AJAX - запрос для удаления выбранного контакта.
  */
 function removeContact() {
     var select = document.querySelector('select');
-    var index = select.selectedIndex;
-    if (index < 0) {
+    var id = select[select.selectedIndex].id;
+    if (id < 0) {
         alert('Выберите пользователя');
         return;
     }
     $.ajax({
         method: "GET",
-        url: "Home/RemoveContact?index=" + index,
+        url: "Contact/RemoveContact?id=" + id,
         success: function (data) {
             $(".container").html(data);
         },

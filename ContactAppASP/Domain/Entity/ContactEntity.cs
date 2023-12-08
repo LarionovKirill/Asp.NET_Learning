@@ -24,5 +24,10 @@
         /// Номера телефона контакта.
         /// </summary>
         public string Phone { get; set; }
+
+        /// <summary>
+        /// Фото человека в контактах.
+        /// </summary>
+        public byte[] Photo { get; set; }
     }
 }

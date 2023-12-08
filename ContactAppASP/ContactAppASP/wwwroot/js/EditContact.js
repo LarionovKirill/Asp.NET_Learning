@@ -18,7 +18,7 @@ const imageView = document.getElementById("img-view");
  */
 function uploadImage() {
     let imgLink = URL.createObjectURL(inputFile.files[0]);
-    imageView.style.backgroundImage = `url(${imgLink})`;
+    imageView.src = imgLink;
     imageView.textContent = "";
     imageView.style.border = 0;
 }

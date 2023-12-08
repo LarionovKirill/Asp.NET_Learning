@@ -1,4 +1,4 @@
-﻿@model List<Contact>
+﻿@model IEnumerable<ContactEntity>
 @{
     ViewData["Title"] = "Home page";
 }
@@ -11,8 +11,15 @@
         <select 
             size="5" 
             class="contactList" 
-            asp-items="@(new SelectList(ViewBag.Contacts,"Name","Name"))"
             onclick="showInfo()">
+            @foreach(var contact in Model)
+            {
+                <option 
+                    id="@contact.Id"
+                    onclick="showInfo()">
+                    @contact.Name
+                </option>
+            }
         </select>
     </div>
     <div class="buttons_contact">
@@ -22,14 +29,14 @@
             width="30px"  
             height="30px" 
             class="add" 
-            onclick="location.href='@Url.Action("AddContact", "Home")'">
+            onclick="location.href='@Url.Action("AddContact", "Contact")'">
         <input 
             type="image" 
             src="~/images/Edit_User_512x512.png"
             width="30px" 
             height="30px" 
             class="edit" 
-            onclick="editContact()">
+            onclick="location.href='@Url.Action("EditContact", "Contact")'">
         <input 
             type="image" 
             src="~/images/Remove_User_512x512.png"
@@ -40,7 +47,7 @@
     </div>
     <div class="contact_info">
         <div class="user_photo">
-            <img src="~/images/User_Avatar_512x512.png" width="150px" height="150px">
+            <img src="@ViewData["photo"]" width="300px" height="200px">
         </div>
         <div class="form_info">
             <label>Имя:</label>
