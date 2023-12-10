@@ -33,6 +33,12 @@ namespace ContactAppASP.Services
                 }
                 contact.Photo = imageData;
             }
+            else
+            {
+                string path = "wwwroot/images/Empty_User_818x500.png";
+                byte[] imageData = File.ReadAllBytes(path);
+                contact.Photo = imageData;
+            }
             return contact;
         }
     }
