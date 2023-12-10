@@ -1,5 +1,4 @@
 ﻿using Contact.Domain.Entity;
-using Microsoft.EntityFrameworkCore;
 
 namespace Contact.DAL.Repository
 {
