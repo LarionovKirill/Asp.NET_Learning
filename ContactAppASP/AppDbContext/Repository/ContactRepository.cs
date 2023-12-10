@@ -33,7 +33,7 @@ namespace Contact.DAL.Repository
         public void Create(ContactEntity contact)
         {
             _database.Contacts.Add(contact);
-            _database.SaveChanges();
+            _database.SaveChangesAsync();
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Contact.DAL.Repository
         {
             var contact = GetContact(id);
             _database.Contacts.Remove(contact);
-            _database.SaveChanges();
+            _database.SaveChangesAsync();
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Contact.DAL.Repository
         {
             var editContact = _database.Contacts.FirstOrDefault(x => x.Id == id);
             editContact.Clone(contact);
-            _database.SaveChanges();
+            _database.SaveChangesAsync();
         }
     }
 }
