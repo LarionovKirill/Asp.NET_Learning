@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ContactAppASP.Services;
 using Contact.DAL.Repository;
 using Contact.Domain.Entity;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace ContactAppASP.Controllers
 {
@@ -152,10 +153,8 @@ namespace ContactAppASP.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        public IActionResult FindContacts(string mask)
         {
-            _database.Dispose();
-            base.Dispose(disposing);
         }
     }
 }

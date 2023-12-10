@@ -1,4 +1,21 @@
-﻿/**
+﻿search = document.getElementById('find');
+
+function findContacts() {
+    $.ajax({
+        method: "GET",
+        url: "Contact/FindContacts?mask=" + search.value,
+        success: function (data) {
+            $(".container").html(data);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    })
+}
+
+search.addEventListener('input', findContacts);
+
+/**
  * Посылает AJAX - запрос на сервер по выбранному контакту
  * и выводит информацию на экран.
  */
