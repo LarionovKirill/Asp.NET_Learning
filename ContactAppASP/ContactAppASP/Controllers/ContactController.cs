@@ -23,7 +23,7 @@ namespace ContactAppASP.Controllers
         /// <param name="db">База данных.</param>
         public ContactController(AppDbContext db)
         {
-            _database = new SQLContactRepository(db);
+            _database = new ContactRepository(db);
         }
 
         /// <summary>

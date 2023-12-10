@@ -5,7 +5,7 @@ namespace Contact.DAL.Repository
     /// <summary>
     /// Интерфейс для работы с объектами контактов в базе данных.
     /// </summary>
-    public class SQLContactRepository : IRepository<ContactEntity>
+    public class ContactRepository : IRepository<ContactEntity>
     {
         /// <summary>
         /// Параметр освобождения ресурсов.
@@ -18,10 +18,10 @@ namespace Contact.DAL.Repository
         private AppDbContext.AppDbContext _database;
 
         /// <summary>
-        /// Конструктор класса <see cref="SQLContactRepository"/>.
+        /// Конструктор класса <see cref="ContactRepository"/>.
         /// </summary>
         /// <param name="db">База данных.</param>
-        public SQLContactRepository(AppDbContext.AppDbContext db)
+        public ContactRepository(AppDbContext.AppDbContext db)
         {
             _database = db;
         }
