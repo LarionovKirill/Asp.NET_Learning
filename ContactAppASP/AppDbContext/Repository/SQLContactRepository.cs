@@ -41,11 +41,8 @@ namespace Contact.DAL.Repository
         /// <param name="id">Id контакта в базе данных.</param>
         public void Delete(int id)
         {
-            ContactEntity contact = GetContact(id);
-            if (contact != null)
-            {
-                _database.Contacts.Remove(contact);
-            }
+            var contact = GetContact(id);
+            _database.Contacts.Remove(contact);
         }
 
         /// <summary>
