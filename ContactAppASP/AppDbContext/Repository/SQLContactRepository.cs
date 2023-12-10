@@ -13,14 +13,14 @@ namespace Contact.DAL.Repository
         private bool _disposed = false;
 
         /// <summary>
-        /// База данных
+        /// База данных.
         /// </summary>
         private AppDbContext.AppDbContext _database;
 
         /// <summary>
-        /// Конструктор 
+        /// Конструктор класса <see cref="SQLContactRepository"/>.
         /// </summary>
-        /// <param name="db"></param>
+        /// <param name="db">База данных.</param>
         public SQLContactRepository(AppDbContext.AppDbContext db)
         {
             _database = db;

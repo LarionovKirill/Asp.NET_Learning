@@ -38,10 +38,5 @@ namespace Contact.DAL.Repository
         /// </summary>
         /// <param name="id">Id контакта в базе данных.</param>
         void Delete(int id);
-
-        /// <summary>
-        /// Сохранение изменений в базе данных.
-        /// </summary>
-        void SaveChanges();
     }
 }
