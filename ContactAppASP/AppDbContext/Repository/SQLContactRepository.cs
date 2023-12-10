@@ -3,7 +3,7 @@
 namespace Contact.DAL.Repository
 {
     /// <summary>
-    /// Интерфейс базы данных MS SQL.
+    /// Интерфейс для работы с объектами контактов в базе данных.
     /// </summary>
     public class SQLContactRepository : IRepository<ContactEntity>
     {
