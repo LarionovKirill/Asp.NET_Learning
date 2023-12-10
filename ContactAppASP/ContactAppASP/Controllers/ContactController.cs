@@ -121,7 +121,6 @@ namespace ContactAppASP.Controllers
             {
                 var saveContact = ContactService.AddContact(name, number, email, photo);
                 _database.Create(saveContact);
-                _database.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -135,7 +134,6 @@ namespace ContactAppASP.Controllers
                     editContact.Photo = copyPhoto;
                 }
                 _database.Update(editContact, ContactService.SelectedId);
-                _database.SaveChanges();
             }
             ContactService.SelectedId = -1;
             return RedirectToAction("Index");
@@ -150,12 +148,6 @@ namespace ContactAppASP.Controllers
         {
             ContactService.SelectedId = -1;
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            _database.Dispose();
-            base.Dispose(disposing);
         }
     }
 }
