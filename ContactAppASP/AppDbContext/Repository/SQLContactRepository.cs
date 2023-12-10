@@ -73,7 +73,7 @@ namespace Contact.DAL.Repository
         }
 
         /// <summary>
-        /// Получение контакта по ID.
+        /// Получение контакта по Id.
         /// </summary>
         /// <param name="id">Id контакта.</param>
         /// <returns>Возвращает контакт типа <see cref="ContactEntity"/>.</returns>
