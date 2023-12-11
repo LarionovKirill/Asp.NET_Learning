@@ -32,7 +32,7 @@ namespace Contact.DAL.Repository
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
         public void Create(ContactEntity contact)
         {
-            _database.Contacts.Add(contact);
+            _database.Contacts.AddAsync(contact);
             _database.SaveChangesAsync();
         }
 
