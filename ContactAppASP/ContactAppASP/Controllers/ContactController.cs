@@ -24,7 +24,7 @@ namespace ContactAppASP.Controllers
         /// <param name="db">База данных.</param>
         public ContactController(AppDbContext db)
         {
-            _database = new SQLContactRepository(db);
+            _database = new ContactRepository(db);
         }
 
         /// <summary>
@@ -87,20 +87,20 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult EditContact()
         {
-            if (ContactService.SelectedId > 0)
+            if (ContactService.SelectedId <= 0)
             {
-                var contact = _database.GetContact(ContactService.SelectedId);
-                if (contact != null)
-                {
-                    ViewData["name"] = contact.Name;
-                    ViewData["phone"] = contact.Phone;
-                    ViewData["email"] = contact.Email;
-                    ViewData["photo"] = "data:image/png;base64,"
-                        + Convert.ToBase64String(contact.Photo);
-                }
-                return View("AddEditContact");
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            var contact = _database.GetContact(ContactService.SelectedId);
+            if (contact != null)
+            {
+                ViewData["name"] = contact.Name;
+                ViewData["phone"] = contact.Phone;
+                ViewData["email"] = contact.Email;
+                ViewData["photo"] = "data:image/png;base64,"
+                    + Convert.ToBase64String(contact.Photo);
+            }
+            return View("AddEditContact");
         }
 
         /// <summary>
@@ -116,28 +116,23 @@ namespace ContactAppASP.Controllers
             string name, 
             string number, 
             string email, 
-            IFormFile photo = null)
+            IFormFile? photo)
         {
             if (ContactService.SelectedId < 0)
             {
                 var saveContact = ContactService.AddContact(name, number, email, photo);
                 _database.Create(saveContact);
-                _database.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             var editContact = _database.GetContact(ContactService.SelectedId);
-            if (editContact != null)
+            byte[] copyPhoto = editContact.Photo;
+            editContact = ContactService.AddContact(name, number, email, photo);
+            if (copyPhoto != editContact.Photo)
             {
-                byte[] copyPhoto = editContact.Photo;
-                editContact = ContactService.AddContact(name, number, email, photo);
-                if (copyPhoto != editContact.Photo)
-                {
-                    editContact.Photo = copyPhoto;
-                }
-                _database.Update(editContact, ContactService.SelectedId);
-                _database.SaveChanges();
+                editContact.Photo = copyPhoto;
             }
+            _database.Update(editContact, ContactService.SelectedId);
             ContactService.SelectedId = -1;
             return RedirectToAction("Index");
         }

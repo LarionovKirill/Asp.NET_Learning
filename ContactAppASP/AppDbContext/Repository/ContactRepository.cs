@@ -1,12 +1,11 @@
 ﻿using Contact.Domain.Entity;
-using Microsoft.EntityFrameworkCore;
 
 namespace Contact.DAL.Repository
 {
     /// <summary>
-    /// Интерфейс базы данных MS SQL.
+    /// Интерфейс для работы с объектами контактов в базе данных.
     /// </summary>
-    public class SQLContactRepository : IRepository<ContactEntity>
+    public class ContactRepository : IRepository<ContactEntity>
     {
         /// <summary>
         /// Параметр освобождения ресурсов.
@@ -14,15 +13,15 @@ namespace Contact.DAL.Repository
         private bool _disposed = false;
 
         /// <summary>
-        /// База данных
+        /// База данных.
         /// </summary>
         private AppDbContext.AppDbContext _database;
 
         /// <summary>
-        /// Конструктор 
+        /// Конструктор класса <see cref="ContactRepository"/>.
         /// </summary>
-        /// <param name="db"></param>
-        public SQLContactRepository(AppDbContext.AppDbContext db)
+        /// <param name="db">База данных.</param>
+        public ContactRepository(AppDbContext.AppDbContext db)
         {
             _database = db;
         }
@@ -33,7 +32,8 @@ namespace Contact.DAL.Repository
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
         public void Create(ContactEntity contact)
         {
-            _database.Contacts.Add(contact);
+            _database.Contacts.AddAsync(contact);
+            _database.SaveChangesAsync();
         }
 
         /// <summary>
@@ -42,11 +42,9 @@ namespace Contact.DAL.Repository
         /// <param name="id">Id контакта в базе данных.</param>
         public void Delete(int id)
         {
-            ContactEntity contact = GetContact(id);
-            if (contact != null)
-            {
-                _database.Contacts.Remove(contact);
-            }
+            var contact = GetContact(id);
+            _database.Contacts.Remove(contact);
+            _database.SaveChangesAsync();
         }
 
         /// <summary>
@@ -75,7 +73,7 @@ namespace Contact.DAL.Repository
         }
 
         /// <summary>
-        /// Получение контакта по ID.
+        /// Получение контакта по Id.
         /// </summary>
         /// <param name="id">Id контакта.</param>
         /// <returns>Возвращает контакт типа <see cref="ContactEntity"/>.</returns>
@@ -94,14 +92,6 @@ namespace Contact.DAL.Repository
         }
 
         /// <summary>
-        /// Сохранение изменений в базе данных.
-        /// </summary>
-        public void SaveChanges()
-        {
-            _database.SaveChanges();
-        }
-
-        /// <summary>
         /// Изменение контакта.
         /// </summary>
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
@@ -109,6 +99,7 @@ namespace Contact.DAL.Repository
         {
             var editContact = _database.Contacts.FirstOrDefault(x => x.Id == id);
             editContact.Clone(contact);
+            _database.SaveChangesAsync();
         }
     }
 }
