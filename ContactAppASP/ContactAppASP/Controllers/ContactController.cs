@@ -91,14 +91,11 @@ namespace ContactAppASP.Controllers
                 return RedirectToAction("Index");
             }
             var contact = _database.GetContact(ContactService.SelectedId);
-            if (contact != null)
-            {
-                ViewData["name"] = contact.Name;
-                ViewData["phone"] = contact.Phone;
-                ViewData["email"] = contact.Email;
-                ViewData["photo"] = "data:image/png;base64,"
-                    + Convert.ToBase64String(contact.Photo);
-            }
+            ViewData["name"] = contact.Name;
+            ViewData["phone"] = contact.Phone;
+            ViewData["email"] = contact.Email;
+            ViewData["photo"] = "data:image/png;base64,"
+                + Convert.ToBase64String(contact.Photo);
             return View("AddEditContact");
         }
 

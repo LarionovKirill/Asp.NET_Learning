@@ -8,11 +8,6 @@ namespace Contact.DAL.Repository
     public class ContactRepository : IRepository<ContactEntity>
     {
         /// <summary>
-        /// Параметр освобождения ресурсов.
-        /// </summary>
-        private bool _disposed = false;
-
-        /// <summary>
         /// База данных.
         /// </summary>
         private AppDbContext.AppDbContext _database;
@@ -30,7 +25,7 @@ namespace Contact.DAL.Repository
         /// Создание контакта.
         /// </summary>
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
-        public void Create(ContactEntity contact)
+        public async void Create(ContactEntity contact)
         {
             _database.Contacts.AddAsync(contact);
             _database.SaveChangesAsync();
@@ -40,36 +35,11 @@ namespace Contact.DAL.Repository
         /// Удаление контакта.
         /// </summary>
         /// <param name="id">Id контакта в базе данных.</param>
-        public void Delete(int id)
+        public async void Delete(int id)
         {
             var contact = GetContact(id);
             _database.Contacts.Remove(contact);
             _database.SaveChangesAsync();
-        }
-
-        /// <summary>
-        /// Освобождение ресурсов.
-        /// </summary>
-        /// <param name="disposing">Параметр освобождения ресурсов.</param>
-        public virtual void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                if (disposing)
-                {
-                    _database.Dispose();
-                }
-            }
-            _disposed = true;
-        }
-
-        /// <summary>
-        /// Освобождение ресурсов.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -95,7 +65,7 @@ namespace Contact.DAL.Repository
         /// Изменение контакта.
         /// </summary>
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
-        public void Update(ContactEntity contact, int id)
+        public async void Update(ContactEntity contact, int id)
         {
             var editContact = _database.Contacts.FirstOrDefault(x => x.Id == id);
             editContact.Clone(contact);
