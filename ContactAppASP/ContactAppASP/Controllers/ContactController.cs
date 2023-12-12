@@ -71,9 +71,9 @@ namespace ContactAppASP.Controllers
         /// <param name="id">Id контакта в базе.</param>
         /// <returns>Возвращает представление с удаленным контактом.</returns>
         [HttpGet]
-        public IActionResult RemoveContact(int id)
+        public async Task<IActionResult> RemoveContact(int id)
         {
-            _database.Delete(id);
+            await _database.Delete(id);
             ContactService.SelectedId = -1;
             return View("Index", _database.GetContacts());
         }
@@ -108,7 +108,7 @@ namespace ContactAppASP.Controllers
         /// <param name="photo">Фото.</param>
         /// <returns>Возвращает на главную страницу с исправленным контактом.</returns>
         [HttpPost]
-        public IActionResult SaveEditContact(
+        public async Task<IActionResult> SaveEditContact(
             string name, 
             string number, 
             string email, 
@@ -117,7 +117,7 @@ namespace ContactAppASP.Controllers
             if (ContactService.SelectedId < 0)
             {
                 var saveContact = ContactService.AddContact(name, number, email, photo);
-                _database.Create(saveContact);
+                await _database.Create(saveContact);
                 return RedirectToAction("Index");
             }
 
@@ -128,7 +128,7 @@ namespace ContactAppASP.Controllers
             {
                 editContact.Photo = copyPhoto;
             }
-            _database.Update(editContact, ContactService.SelectedId);
+            await _database.Update(editContact, ContactService.SelectedId);
             ContactService.SelectedId = -1;
             return RedirectToAction("Index");
         }

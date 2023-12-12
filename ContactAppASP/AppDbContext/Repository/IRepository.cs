@@ -25,18 +25,18 @@ namespace Contact.DAL.Repository
         /// Создание контакта.
         /// </summary>
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
-        void Create(ContactEntity contact);
+        Task Create(ContactEntity contact);
 
         /// <summary>
         /// Изменение контакта.
         /// </summary>
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
-        void Update(ContactEntity contact, int id);
+        Task Update(ContactEntity contact, int id);
 
         /// <summary>
         /// Удаление контакта.
         /// </summary>
         /// <param name="id">Id контакта в базе данных.</param>
-        void Delete(int id);
+        Task Delete(int id);
     }
 }
