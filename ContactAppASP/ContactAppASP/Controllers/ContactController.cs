@@ -5,6 +5,8 @@ using ContactAppASP.Services;
 using Contact.DAL.Repository;
 using Contact.Domain.Entity;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using Microsoft.AspNetCore.Identity;
+using System.Globalization;
 
 namespace ContactAppASP.Controllers
 {
@@ -150,6 +152,12 @@ namespace ContactAppASP.Controllers
 
         public IActionResult FindContacts(string mask)
         {
+            if (mask == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var foundContacts = _database.FindContacts(mask);
+            return View("Index", foundContacts.OrderBy(p=>p.Name));
         }
     }
 }

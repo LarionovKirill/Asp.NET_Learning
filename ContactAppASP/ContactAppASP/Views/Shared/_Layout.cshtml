@@ -6,16 +6,16 @@
     <title>@ViewData["Title"] - ContactAppASP</title>
     <link rel="stylesheet" href="~/css/ContactStyle.css">
     <link rel="stylesheet" href="~/ContactAppASP.styles.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/Index.js" asp-append-version="true"></script>
 </head>
 <body>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+            @await RenderSectionAsync("Scripts", false)
         </main>
     </div>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/Index.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

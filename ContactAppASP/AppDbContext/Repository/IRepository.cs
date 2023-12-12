@@ -38,5 +38,12 @@ namespace Contact.DAL.Repository
         /// </summary>
         /// <param name="id">Id контакта в базе данных.</param>
         void Delete(int id);
+
+        /// <summary>
+        /// Метод ищет контакты, в которых имя совпадает с маской. 
+        /// </summary>
+        /// <param name="mask">Маска имени.</param>
+        /// <returns></returns>
+        IEnumerable<T> FindContacts(string mask);
     }
 }

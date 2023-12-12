@@ -9,7 +9,8 @@
             class="find" 
             type="search" 
             placeholder="Введите имя"
-            id="find">
+            id="find"
+            oninput="location.href='@Url.Action("FindContacts", "Contact")'">
     </div>
     <div class="list_contact">
         <select 
