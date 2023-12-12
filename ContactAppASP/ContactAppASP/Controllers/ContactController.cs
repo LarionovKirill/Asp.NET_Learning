@@ -15,7 +15,7 @@ namespace ContactAppASP.Controllers
         /// <summary>
         /// База данных.
         /// </summary>
-        private IRepository<ContactEntity> _database;
+        private IRepository _database;
 
         /// <summary>
         /// Конструктор контроллера <see cref="ContactController"/>.

@@ -6,20 +6,20 @@ namespace Contact.DAL.Repository
     /// Обобщенный интерфейс взаимодействия с базой данных.
     /// </summary>
     /// <typeparam name="T">Тип данных параметра.</typeparam>
-    public interface IRepository<T>
+    public interface IRepository
     {
         /// <summary>
         /// Получение списка контактов.
         /// </summary>
         /// <returns>Возвращает список контактов в базе данных.</returns>
-        IEnumerable<T> GetContacts();
+        IEnumerable<ContactEntity> GetContacts();
 
         /// <summary>
         /// Получение контакта по ID.
         /// </summary>
         /// <param name="id">Id контакта.</param>
         /// <returns>Возвращает контакт типа <see cref="ContactEntity"/>.</returns>
-        T GetContact(int id);
+        ContactEntity GetContact(int id);
 
         /// <summary>
         /// Создание контакта.

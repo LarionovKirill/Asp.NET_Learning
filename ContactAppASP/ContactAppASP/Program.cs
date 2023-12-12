@@ -2,6 +2,7 @@ using Contact.DAL.AppDbContext;
 using Contact.DAL.Repository;
 using Contact.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
+using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<DbContext, AppDbContext>();
+builder.Services.AddScoped<IRepository, ContactRepository>();
 
 var app = builder.Build();
 

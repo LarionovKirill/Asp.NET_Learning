@@ -5,7 +5,7 @@ namespace Contact.DAL.Repository
     /// <summary>
     /// Интерфейс для работы с объектами контактов в базе данных.
     /// </summary>
-    public class ContactRepository : IRepository<ContactEntity>
+    public class ContactRepository : IRepository
     {
         /// <summary>
         /// База данных.
