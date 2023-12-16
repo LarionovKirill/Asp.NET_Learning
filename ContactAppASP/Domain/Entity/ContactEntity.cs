@@ -3,7 +3,7 @@
     /// <summary>
     /// Класс представления контакта в базе данных.
     /// </summary>
-    public class ContactEntity : ICloneable
+    public class ContactEntity
     {
         /// <summary>
         /// Id контакта.
@@ -31,34 +31,6 @@
         public byte[] Photo { get; set; }
 
         /// <summary>
-        /// Констуктор класса <see cref="ContactEntity"/>.
-        /// </summary>
-        /// <param name="name">Имя контакта.</param>
-        /// <param name="email">Email контакта.</param>
-        /// <param name="phone">Телефон контакта.</param>
-        /// <param name="photo">Фото контакта.</param>
-        public ContactEntity(string name, string email, string phone, byte[] photo)
-        {
-            Name = name;
-            Email = email;
-            Phone = phone;
-            Photo = photo;
-        }
-
-        /// <summary>
-        /// Констуктор класса <see cref="ContactEntity"/>.
-        /// </summary>
-        /// <param name="name">Имя контакта.</param>
-        /// <param name="email">Email контакта.</param>
-        /// <param name="phone">Телефон контакта.</param>
-        public ContactEntity(string name, string email, string phone)
-        {
-            Name = name;
-            Email = email;
-            Phone = phone;
-        }
-
-        /// <summary>
         /// Копирует значения переданного контакта.
         /// </summary>
         /// <param name="contact">Переданный контакт.</param>
@@ -68,11 +40,6 @@
             Email = contact.Email;
             Phone = contact.Phone;
             Photo = contact.Photo;
-        }
-
-        public object Clone()
-        {
-            return new ContactEntity(Name, Email, Phone, Photo);
         }
     }
 }

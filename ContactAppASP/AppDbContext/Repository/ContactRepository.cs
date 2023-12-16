@@ -57,9 +57,7 @@ namespace Contact.DAL.Repository
         public async Task Update(ContactEntity contact, int id)
         {
             var editContact = GetContact(id);
-            //editContact.Clone(contact);
-            editContact = (ContactEntity)contact.Clone();
-            editContact.Id = id;
+            editContact.Clone(contact);
             await _database.SaveChangesAsync();
         }
 

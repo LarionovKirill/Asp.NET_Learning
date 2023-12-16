@@ -31,21 +31,19 @@ namespace ContactAppASP.Services
             string email, 
             IFormFile photo)
         {
-            var contact = new ContactEntity(name, phone, email);
+            var contact = new ContactEntity{Name = name, Phone = phone, Email=email};
+            byte[] imageData;
             if (photo != null)
             {
-                byte[] imageData;
                 using (var binaryReader = new BinaryReader(photo.OpenReadStream()))
                 {
                     imageData = binaryReader.ReadBytes((int)photo.Length);
                 }
                 contact.Photo = imageData;
+                return contact;
             }
-            else
-            {
-                var imageData = File.ReadAllBytes(Path);
-                contact.Photo = imageData;
-            }
+            imageData = File.ReadAllBytes(Path);
+            contact.Photo = imageData;
             return contact;
         }
     }
