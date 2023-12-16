@@ -120,9 +120,9 @@ namespace ContactAppASP.Controllers
             }
 
             var editContact = _contactRepository.GetContact(ContactService.SelectedId);
-            byte[] copyPhoto = editContact.Photo;
+            var copyPhoto = editContact.Photo;
             editContact = ContactService.AddContact(name, number, email, photo);
-            if (copyPhoto != editContact.Photo)
+            if (photo == null)
             {
                 editContact.Photo = copyPhoto;
             }
