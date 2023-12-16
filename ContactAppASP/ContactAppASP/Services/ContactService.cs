@@ -5,6 +5,11 @@ namespace ContactAppASP.Services
     public static class ContactService
     {
         /// <summary>
+        /// Путь к фото по умолчанию.
+        /// </summary>
+        private const string Path = "wwwroot/images/Empty_User_818x500.png";
+
+        /// <summary>
         /// Выбранный Id.
         /// </summary>
         public static int SelectedId { get; set; }
@@ -23,10 +28,10 @@ namespace ContactAppASP.Services
             string email, 
             IFormFile photo)
         {
-            var contact = new ContactEntity { Name = name, Phone = phone, Email = email };
+            var contact = new ContactEntity(name, phone, email);
             if (photo != null)
             {
-                byte[] imageData = null;
+                byte[] imageData;
                 using (var binaryReader = new BinaryReader(photo.OpenReadStream()))
                 {
                     imageData = binaryReader.ReadBytes((int)photo.Length);
@@ -35,8 +40,7 @@ namespace ContactAppASP.Services
             }
             else
             {
-                string path = "wwwroot/images/Empty_User_818x500.png";
-                byte[] imageData = File.ReadAllBytes(path);
+                var imageData = File.ReadAllBytes(Path);
                 contact.Photo = imageData;
             }
             return contact;

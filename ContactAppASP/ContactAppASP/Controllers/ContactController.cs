@@ -11,9 +11,9 @@ namespace ContactAppASP.Controllers
     public class ContactController : Controller
     {
         /// <summary>
-        /// База данных.
+        /// Репозиторий.
         /// </summary>
-        private IRepository _database;
+        private IRepository _contactRepository;
 
         /// <summary>
         /// Конструктор контроллера <see cref="ContactController"/>.
@@ -21,7 +21,7 @@ namespace ContactAppASP.Controllers
         /// <param name="db">База данных.</param>
         public ContactController(AppDbContext db)
         {
-            _database = new ContactRepository(db);
+            _contactRepository = new ContactRepository(db);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_database.GetContacts());
+            return View(_contactRepository.GetContacts());
         }
 
         /// <summary>
@@ -53,14 +53,14 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult GetContact(int id)
         {
-            var contact = _database.GetContact(id);
+            var contact = _contactRepository.GetContact(id);
             ViewData["name"] = contact.Name;
             ViewData["phone"] = contact.Phone;
             ViewData["email"] = contact.Email;
             ViewData["photo"] = "data:image/png;base64,"
                     + Convert.ToBase64String(contact.Photo);
             ContactService.SelectedId = id;
-            return View("Index", _database.GetContacts());
+            return View("Index", _contactRepository.GetContacts());
         }
 
         /// <summary>
@@ -71,9 +71,9 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public async Task<IActionResult> RemoveContact(int id)
         {
-            await _database.Delete(id);
+            await _contactRepository.Delete(id);
             ContactService.SelectedId = -1;
-            return View("Index", _database.GetContacts());
+            return View("Index", _contactRepository.GetContacts());
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace ContactAppASP.Controllers
             {
                 return RedirectToAction("Index");
             }
-            var contact = _database.GetContact(ContactService.SelectedId);
+            var contact = _contactRepository.GetContact(ContactService.SelectedId);
             ViewData["name"] = contact.Name;
             ViewData["phone"] = contact.Phone;
             ViewData["email"] = contact.Email;
@@ -115,18 +115,18 @@ namespace ContactAppASP.Controllers
             if (ContactService.SelectedId < 0)
             {
                 var saveContact = ContactService.AddContact(name, number, email, photo);
-                await _database.Create(saveContact);
+                await _contactRepository.Create(saveContact);
                 return RedirectToAction("Index");
             }
 
-            var editContact = _database.GetContact(ContactService.SelectedId);
+            var editContact = _contactRepository.GetContact(ContactService.SelectedId);
             byte[] copyPhoto = editContact.Photo;
             editContact = ContactService.AddContact(name, number, email, photo);
             if (copyPhoto != editContact.Photo)
             {
                 editContact.Photo = copyPhoto;
             }
-            await _database.Update(editContact, ContactService.SelectedId);
+            await _contactRepository.Update(editContact, ContactService.SelectedId);
             ContactService.SelectedId = -1;
             return RedirectToAction("Index");
         }

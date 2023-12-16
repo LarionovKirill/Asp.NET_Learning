@@ -1,6 +1,4 @@
 ﻿using Contact.Domain.Entity;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
 namespace Contact.DAL.Repository
 {
@@ -53,6 +51,19 @@ namespace Contact.DAL.Repository
         }
 
         /// <summary>
+        /// Изменение контакта.
+        /// </summary>
+        /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
+        public async Task Update(ContactEntity contact, int id)
+        {
+            var editContact = GetContact(id);
+            //editContact.Clone(contact);
+            editContact = (ContactEntity)contact.Clone();
+            editContact.Id = id;
+            await _database.SaveChangesAsync();
+        }
+
+        /// <summary>
         /// Удаление контакта.
         /// </summary>
         /// <param name="id">Id контакта в базе данных.</param>
@@ -60,17 +71,6 @@ namespace Contact.DAL.Repository
         {
             var contact = GetContact(id);
             _database.Contacts.Remove(contact);
-            await _database.SaveChangesAsync();
-        }
-
-        /// <summary>
-        /// Изменение контакта.
-        /// </summary>
-        /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
-        public async Task Update(ContactEntity contact, int id)
-        {
-            var editContact = GetContact(id);
-            editContact.Clone(contact);
             await _database.SaveChangesAsync();
         }
     }
