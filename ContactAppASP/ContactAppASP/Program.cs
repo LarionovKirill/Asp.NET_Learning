@@ -1,8 +1,6 @@
 using Contact.DAL.AppDbContext;
 using Contact.DAL.Repository;
-using Contact.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
-using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
