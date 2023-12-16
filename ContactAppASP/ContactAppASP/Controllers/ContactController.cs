@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Contact.DAL.AppDbContext;
-using Microsoft.EntityFrameworkCore;
 using ContactAppASP.Services;
 using Contact.DAL.Repository;
-using Contact.Domain.Entity;
 
 namespace ContactAppASP.Controllers
 {
