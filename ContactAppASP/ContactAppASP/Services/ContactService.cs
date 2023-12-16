@@ -2,6 +2,9 @@
 
 namespace ContactAppASP.Services
 {
+    /// <summary>
+    /// Сервисный класс для хранения Id и создания контакта.
+    /// </summary>
     public static class ContactService
     {
         /// <summary>
