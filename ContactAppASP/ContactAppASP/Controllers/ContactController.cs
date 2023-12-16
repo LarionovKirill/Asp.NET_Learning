@@ -19,9 +19,9 @@ namespace ContactAppASP.Controllers
         /// Конструктор контроллера <see cref="ContactController"/>.
         /// </summary>
         /// <param name="db">База данных.</param>
-        public ContactController(AppDbContext db)
+        public ContactController(IRepository db)
         {
-            _contactRepository = new ContactRepository(db);
+            _contactRepository = db;
         }
 
         /// <summary>
