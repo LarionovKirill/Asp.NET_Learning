@@ -24,6 +24,25 @@ namespace Contact.DAL.Repository
         }
 
         /// <summary>
+        /// Получение списка контактов.
+        /// </summary>
+        /// <returns>Возвращает список контактов в базе данных.</returns>
+        public IEnumerable<ContactEntity> GetContacts()
+        {
+            return _database.Contacts;
+        }
+
+        /// <summary>
+        /// Получение контакта по Id.
+        /// </summary>
+        /// <param name="id">Id контакта.</param>
+        /// <returns>Возвращает контакт типа <see cref="ContactEntity"/>.</returns>
+        public ContactEntity GetContact(int id)
+        {
+            return _database.Contacts.FirstOrDefault(x => x.Id == id);
+        }
+
+        /// <summary>
         /// Создание контакта.
         /// </summary>
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
@@ -45,31 +64,12 @@ namespace Contact.DAL.Repository
         }
 
         /// <summary>
-        /// Получение контакта по Id.
-        /// </summary>
-        /// <param name="id">Id контакта.</param>
-        /// <returns>Возвращает контакт типа <see cref="ContactEntity"/>.</returns>
-        public ContactEntity GetContact(int id)
-        {
-            return _database.Contacts.FirstOrDefault(x => x.Id == id);
-        }
-
-        /// <summary>
-        /// Получение списка контактов.
-        /// </summary>
-        /// <returns>Возвращает список контактов в базе данных.</returns>
-        public IEnumerable<ContactEntity> GetContacts()
-        {
-            return _database.Contacts;
-        }
-
-        /// <summary>
         /// Изменение контакта.
         /// </summary>
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
         public async Task Update(ContactEntity contact, int id)
         {
-            var editContact = _database.Contacts.FirstOrDefault(x => x.Id == id);
+            var editContact = GetContact(id);
             editContact.Clone(contact);
             await _database.SaveChangesAsync();
         }
