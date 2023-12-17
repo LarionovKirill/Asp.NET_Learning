@@ -27,6 +27,26 @@ var mask = new IMask(phoneInput, {
 });
 
 /**
+ * Валидация номера телефона.
+ */
+function phoneValidation()
+{
+    if (phoneInput.value.includes('_') == true)
+    {
+        phoneInput.style.backgroundColor = "#F08080";
+        saveButton.disabled = true;
+        return;
+    }
+    phoneInput.style.backgroundColor = "white";
+    fullValidation();
+}
+
+/**
+ * Обработчик изменения номера телефона.
+ */
+phoneInput.addEventListener('input', phoneValidation);
+
+/**
  * Валидация имени.
  */
 function nameValidation()
@@ -38,7 +58,7 @@ function nameValidation()
         return;
     }
     nameInput.style.backgroundColor = "white";
-    saveButton.disabled = false;
+    fullValidation();
 }
 
 /**
@@ -57,11 +77,28 @@ function emailValidation() {
         saveButton.disabled = true;
         return;
     }
+    if (emailInput.value.length == 0)
+    {
+        emailInput.style.backgroundColor = "white";
+    }
     emailInput.style.backgroundColor = "white";
-    saveButton.disabled = false;
+    fullValidation();
 }
 
 /**
  * Обработчик изменения Email.
  */
 emailInput.addEventListener("input", emailValidation);
+
+/**
+ * Проверка правильности всех полей. 
+ */
+function fullValidation()
+{
+    if (emailInput.style.backgroundColor == "white" &&
+        nameInput.style.backgroundColor == "white" &&
+        phoneInput.style.backgroundColor == "white")
+    {
+        saveButton.disabled = false;
+    }
+}
