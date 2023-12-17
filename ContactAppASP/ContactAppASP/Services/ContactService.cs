@@ -2,8 +2,16 @@
 
 namespace ContactAppASP.Services
 {
+    /// <summary>
+    /// Сервисный класс для хранения Id и создания контакта.
+    /// </summary>
     public static class ContactService
     {
+        /// <summary>
+        /// Путь к фото по умолчанию.
+        /// </summary>
+        private const string Path = "wwwroot/images/Empty_User_818x500.png";
+
         /// <summary>
         /// Выбранный Id.
         /// </summary>
@@ -23,22 +31,19 @@ namespace ContactAppASP.Services
             string email, 
             IFormFile photo)
         {
-            var contact = new ContactEntity { Name = name, Phone = phone, Email = email };
+            var contact = new ContactEntity{Name = name, Phone = phone, Email=email};
+            byte[] imageData;
             if (photo != null)
             {
-                byte[] imageData = null;
                 using (var binaryReader = new BinaryReader(photo.OpenReadStream()))
                 {
                     imageData = binaryReader.ReadBytes((int)photo.Length);
                 }
                 contact.Photo = imageData;
+                return contact;
             }
-            else
-            {
-                string path = "wwwroot/images/Empty_User_818x500.png";
-                byte[] imageData = File.ReadAllBytes(path);
-                contact.Photo = imageData;
-            }
+            imageData = File.ReadAllBytes(Path);
+            contact.Photo = imageData;
             return contact;
         }
     }

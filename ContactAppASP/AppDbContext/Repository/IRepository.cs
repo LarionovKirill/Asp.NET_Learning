@@ -6,44 +6,37 @@ namespace Contact.DAL.Repository
     /// Обобщенный интерфейс взаимодействия с базой данных.
     /// </summary>
     /// <typeparam name="T">Тип данных параметра.</typeparam>
-    public interface IRepository<T>: IDisposable
+    public interface IRepository
     {
         /// <summary>
         /// Получение списка контактов.
         /// </summary>
         /// <returns>Возвращает список контактов в базе данных.</returns>
-        IEnumerable<T> GetContacts();
+        IEnumerable<ContactEntity> GetContacts();
 
         /// <summary>
         /// Получение контакта по ID.
         /// </summary>
         /// <param name="id">Id контакта.</param>
         /// <returns>Возвращает контакт типа <see cref="ContactEntity"/>.</returns>
-        T GetContact(int id);
+        ContactEntity GetContact(int id);
 
         /// <summary>
         /// Создание контакта.
         /// </summary>
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
-        void Create(ContactEntity contact);
+        Task Create(ContactEntity contact);
 
         /// <summary>
         /// Изменение контакта.
         /// </summary>
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
-        void Update(ContactEntity contact, int id);
+        Task Update(ContactEntity contact, int id);
 
         /// <summary>
         /// Удаление контакта.
         /// </summary>
         /// <param name="id">Id контакта в базе данных.</param>
-        void Delete(int id);
-
-        /// <summary>
-        /// Метод ищет контакты, в которых имя совпадает с маской. 
-        /// </summary>
-        /// <param name="mask">Маска имени.</param>
-        /// <returns></returns>
-        IEnumerable<T> FindContacts(string mask);
+        Task Delete(int id);
     }
 }

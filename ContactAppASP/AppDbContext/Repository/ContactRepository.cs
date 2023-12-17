@@ -5,13 +5,8 @@ namespace Contact.DAL.Repository
     /// <summary>
     /// Интерфейс для работы с объектами контактов в базе данных.
     /// </summary>
-    public class ContactRepository : IRepository<ContactEntity>
+    public class ContactRepository : IRepository
     {
-        /// <summary>
-        /// Параметр освобождения ресурсов.
-        /// </summary>
-        private bool _disposed = false;
-
         /// <summary>
         /// База данных.
         /// </summary>
@@ -27,49 +22,12 @@ namespace Contact.DAL.Repository
         }
 
         /// <summary>
-        /// Создание контакта.
+        /// Получение списка контактов.
         /// </summary>
-        /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
-        public void Create(ContactEntity contact)
+        /// <returns>Возвращает список контактов в базе данных.</returns>
+        public IEnumerable<ContactEntity> GetContacts()
         {
-            _database.Contacts.AddAsync(contact);
-            _database.SaveChangesAsync();
-        }
-
-        /// <summary>
-        /// Удаление контакта.
-        /// </summary>
-        /// <param name="id">Id контакта в базе данных.</param>
-        public void Delete(int id)
-        {
-            var contact = GetContact(id);
-            _database.Contacts.Remove(contact);
-            _database.SaveChangesAsync();
-        }
-
-        /// <summary>
-        /// Освобождение ресурсов.
-        /// </summary>
-        /// <param name="disposing">Параметр освобождения ресурсов.</param>
-        public virtual void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                if (disposing)
-                {
-                    _database.Dispose();
-                }
-            }
-            _disposed = true;
-        }
-
-        /// <summary>
-        /// Освобождение ресурсов.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            return _database.Contacts;
         }
 
         /// <summary>
@@ -95,23 +53,35 @@ namespace Contact.DAL.Repository
         }
 
         /// <summary>
-        /// Получение списка контактов.
+        /// Создание контакта.
         /// </summary>
-        /// <returns>Возвращает список контактов в базе данных.</returns>
-        public IEnumerable<ContactEntity> GetContacts()
+        /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
+        public async Task Create(ContactEntity contact)
         {
-            return _database.Contacts;
+            await _database.Contacts.AddAsync(contact);
+            await _database.SaveChangesAsync();
         }
 
         /// <summary>
         /// Изменение контакта.
         /// </summary>
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
-        public void Update(ContactEntity contact, int id)
+        public async Task Update(ContactEntity contact, int id)
         {
-            var editContact = _database.Contacts.FirstOrDefault(x => x.Id == id);
+            var editContact = GetContact(id);
             editContact.Clone(contact);
-            _database.SaveChangesAsync();
+            await _database.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Удаление контакта.
+        /// </summary>
+        /// <param name="id">Id контакта в базе данных.</param>
+        public async Task Delete(int id)
+        {
+            var contact = GetContact(id);
+            _database.Contacts.Remove(contact);
+            await _database.SaveChangesAsync();
         }
     }
 }

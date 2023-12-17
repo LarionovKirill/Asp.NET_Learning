@@ -1,12 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Contact.DAL.AppDbContext;
-using Microsoft.EntityFrameworkCore;
 using ContactAppASP.Services;
 using Contact.DAL.Repository;
-using Contact.Domain.Entity;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.AspNetCore.Identity;
-using System.Globalization;
 
 namespace ContactAppASP.Controllers
 {
@@ -16,17 +10,17 @@ namespace ContactAppASP.Controllers
     public class ContactController : Controller
     {
         /// <summary>
-        /// База данных.
+        /// Репозиторий.
         /// </summary>
-        private IRepository<ContactEntity> _database;
+        private IRepository _contactRepository;
 
         /// <summary>
         /// Конструктор контроллера <see cref="ContactController"/>.
         /// </summary>
         /// <param name="db">База данных.</param>
-        public ContactController(AppDbContext db)
+        public ContactController(IRepository db)
         {
-            _database = new ContactRepository(db);
+            _contactRepository = db;
         }
 
         /// <summary>
@@ -58,7 +52,7 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult GetContact(int id)
         {
-            var contact = _database.GetContact(id);
+            var contact = _contactRepository.GetContact(id);
             ViewData["name"] = contact.Name;
             ViewData["phone"] = contact.Phone;
             ViewData["email"] = contact.Email;
@@ -74,9 +68,9 @@ namespace ContactAppASP.Controllers
         /// <param name="id">Id контакта в базе.</param>
         /// <returns>Возвращает представление с удаленным контактом.</returns>
         [HttpGet]
-        public IActionResult RemoveContact(int id)
+        public async Task<IActionResult> RemoveContact(int id)
         {
-            _database.Delete(id);
+            await _contactRepository.Delete(id);
             ContactService.SelectedId = -1;
             return View("Index", _database.GetContacts().OrderBy(p => p.Name));
         }
@@ -93,15 +87,12 @@ namespace ContactAppASP.Controllers
             {
                 return RedirectToAction("Index");
             }
-            var contact = _database.GetContact(ContactService.SelectedId);
-            if (contact != null)
-            {
-                ViewData["name"] = contact.Name;
-                ViewData["phone"] = contact.Phone;
-                ViewData["email"] = contact.Email;
-                ViewData["photo"] = "data:image/png;base64,"
-                    + Convert.ToBase64String(contact.Photo);
-            }
+            var contact = _contactRepository.GetContact(ContactService.SelectedId);
+            ViewData["name"] = contact.Name;
+            ViewData["phone"] = contact.Phone;
+            ViewData["email"] = contact.Email;
+            ViewData["photo"] = "data:image/png;base64,"
+                + Convert.ToBase64String(contact.Photo);
             return View("AddEditContact");
         }
 
@@ -114,7 +105,7 @@ namespace ContactAppASP.Controllers
         /// <param name="photo">Фото.</param>
         /// <returns>Возвращает на главную страницу с исправленным контактом.</returns>
         [HttpPost]
-        public IActionResult SaveEditContact(
+        public async Task<IActionResult> SaveEditContact(
             string name, 
             string number, 
             string email, 
@@ -123,18 +114,18 @@ namespace ContactAppASP.Controllers
             if (ContactService.SelectedId < 0)
             {
                 var saveContact = ContactService.AddContact(name, number, email, photo);
-                _database.Create(saveContact);
+                await _contactRepository.Create(saveContact);
                 return RedirectToAction("Index");
             }
 
-            var editContact = _database.GetContact(ContactService.SelectedId);
-            byte[] copyPhoto = editContact.Photo;
+            var editContact = _contactRepository.GetContact(ContactService.SelectedId);
+            var copyPhoto = editContact.Photo;
             editContact = ContactService.AddContact(name, number, email, photo);
-            if (copyPhoto != editContact.Photo)
+            if (photo == null)
             {
                 editContact.Photo = copyPhoto;
             }
-            _database.Update(editContact, ContactService.SelectedId);
+            await _contactRepository.Update(editContact, ContactService.SelectedId);
             ContactService.SelectedId = -1;
             return RedirectToAction("Index");
         }
