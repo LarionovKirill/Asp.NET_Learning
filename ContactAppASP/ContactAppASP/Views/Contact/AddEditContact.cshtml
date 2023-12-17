@@ -10,14 +10,15 @@
         </div>
         <div class="form_info">
             <label>Имя:</label>
-            <input class="name" type="search" name='name' value="@ViewData["name"]">
+            <input class="name" id="name" type="search" name='name' value="@ViewData["name"]">
             <label>Номер:</label>
-            <input class="phone" type="search" name='number' value="@ViewData["phone"]">
+            <input class="phone" id="phone" type="search" name='number' value="@ViewData["phone"]">
             <label>Email:</label>
-            <input class="email" type="search" name='email' value="@ViewData["email"]">
-            <button class="btn" asp-action="CancelAction">Отмена</button>
+            <input class="email" id ="email" type="search" name='email' value="@ViewData["email"]">
+            <button class="btn" asp-action="CancelAction" id = "saveBut">Отмена</button>
             <button class="btn" asp-action="SaveEditContact">Сохранить</button>
         </div>
     </div>
 </form>
 <script src="~/js/EditContact.js" asp-append-version="true"></script>
+<script src="~/js/ContactValidation.js" asp-append-version="true"></script>
