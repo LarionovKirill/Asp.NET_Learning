@@ -20,6 +20,7 @@ function findContacts() {
 
 search.addEventListener('input', findContacts);
 */
+
 /**
  * Посылает AJAX - запрос на сервер по выбранному контакту
  * и выводит информацию на экран.
