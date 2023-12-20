@@ -35,16 +35,24 @@ namespace ContactAppASP.Services
             byte[] imageData;
             if (photo != null)
             {
-                using (var binaryReader = new BinaryReader(photo.OpenReadStream()))
-                {
-                    imageData = binaryReader.ReadBytes((int)photo.Length);
-                }
-                contact.Photo = imageData;
+                contact.Photo = ConvertPhotoToBytes(photo);
                 return contact;
             }
             imageData = File.ReadAllBytes(Path);
             contact.Photo = imageData;
             return contact;
+        }
+
+        /// <summary>
+        /// Метод конвертирует переданное фото в массив байт.
+        /// </summary>
+        /// <param name="photo">Фото.</param>
+        /// <returns>Фото в виде массива байт.</returns>
+        public static byte[] ConvertPhotoToBytes(IFormFile photo)
+        {
+            using var memoryStream = new MemoryStream();
+            photo.CopyTo(memoryStream);
+            return memoryStream.ToArray();
         }
     }
 }

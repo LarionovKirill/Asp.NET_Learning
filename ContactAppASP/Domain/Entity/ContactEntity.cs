@@ -29,17 +29,5 @@
         /// Фото человека в контактах.
         /// </summary>
         public byte[] Photo { get; set; }
-
-        /// <summary>
-        /// Копирует значения переданного контакта.
-        /// </summary>
-        /// <param name="contact">Переданный контакт.</param>
-        public void Clone(ContactEntity contact)
-        {
-            Name = contact.Name;
-            Email = contact.Email;
-            Phone = contact.Phone;
-            Photo = contact.Photo;
-        }
     }
 }
