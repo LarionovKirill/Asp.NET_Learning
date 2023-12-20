@@ -19,6 +19,13 @@ const phoneInput = document.getElementById("phone");
 const emailInput = document.getElementById("email");
 
 /**
+ * Начальный цвет фона TextBox.
+ */
+emailInput.style.backgroundColor = "white";
+nameInput.style.backgroundColor = "white";
+phoneInput.style.backgroundColor = "white";
+
+/**
 * Создает маску для номера телефона.
 */
 var mask = new IMask(phoneInput, {
@@ -70,7 +77,7 @@ nameInput.addEventListener("input", nameValidation);
  * Валидация Email.
  */
 function emailValidation() {
-    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,5})$/;
     if (emailInput.value.length > 100 || reg.test(emailInput.value) == false)
     {
         emailInput.style.backgroundColor = "#F08080";
