@@ -59,7 +59,8 @@ namespace ContactAppASP.Controllers
             ViewData["photo"] = "data:image/png;base64,"
                     + Convert.ToBase64String(contact.Photo);
             ContactService.SelectedId = id;
-            return View("Index", _contactRepository.GetContacts().OrderBy(p => p.Name));
+            var sortContactList = _contactRepository.GetContacts().OrderBy(p => p.Name);
+            return View("Index", sortContactList);
         }
 
         /// <summary>
@@ -72,7 +73,8 @@ namespace ContactAppASP.Controllers
         {
             await _contactRepository.Delete(id);
             ContactService.SelectedId = -1;
-            return View("Index", _contactRepository.GetContacts().OrderBy(p => p.Name));
+            var sortContactList = _contactRepository.GetContacts().OrderBy(p => p.Name);
+            return View("Index", sortContactList);
         }
 
         /// <summary>
@@ -141,16 +143,6 @@ namespace ContactAppASP.Controllers
         {
             ContactService.SelectedId = -1;
             return RedirectToAction("Index");
-        }
-
-        public IActionResult FindContacts(string mask)
-        {
-            if (mask == null)
-            {
-                return RedirectToAction("Index");
-            }
-            var foundContacts = _contactRepository.FindContacts(mask);
-            return View("Index", foundContacts.OrderBy(p=>p.Name));
         }
     }
 }
