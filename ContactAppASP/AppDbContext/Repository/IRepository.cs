@@ -31,7 +31,7 @@ namespace Contact.DAL.Repository
         /// Изменение контакта.
         /// </summary>
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
-        Task Update(ContactEntity contact, int id);
+        void Update(ContactEntity contact);
 
         /// <summary>
         /// Удаление контакта.

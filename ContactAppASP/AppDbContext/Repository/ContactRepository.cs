@@ -54,11 +54,10 @@ namespace Contact.DAL.Repository
         /// Изменение контакта.
         /// </summary>
         /// <param name="contact">Контакт типа <see cref="ContactEntity"/>.</param>
-        public async Task Update(ContactEntity contact, int id)
+        public void Update(ContactEntity contact)
         {
-            var editContact = GetContact(id);
-            editContact.Clone(contact);
-            await _database.SaveChangesAsync();
+            _database.Contacts.Update(contact);
+            _database.SaveChanges();
         }
 
         /// <summary>

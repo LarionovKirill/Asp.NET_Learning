@@ -119,13 +119,15 @@ namespace ContactAppASP.Controllers
             }
 
             var editContact = _contactRepository.GetContact(ContactService.SelectedId);
-            var copyPhoto = editContact.Photo;
-            editContact = ContactService.AddContact(name, number, email, photo);
-            if (photo == null)
+            editContact.Name= name;
+            editContact.Phone= number;
+            editContact.Email= email;
+            editContact.Id = ContactService.SelectedId;
+            if (photo != null)
             {
-                editContact.Photo = copyPhoto;
+                editContact.Photo = ContactService.ConvertPhotoToBytes(photo);
             }
-            await _contactRepository.Update(editContact, ContactService.SelectedId);
+            _contactRepository.Update(editContact);
             ContactService.SelectedId = -1;
             return RedirectToAction("Index");
         }
