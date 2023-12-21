@@ -5,7 +5,12 @@
 
 <div class="wrapper">
     <div class="search">
-        <input class="find" type="search" placeholder="Введите имя">
+        <input 
+            class="find" 
+            type="search" 
+            placeholder="Введите имя"
+            id="find"
+            oninput="location.href='@Url.Action("FindContacts", "Contact")'">
     </div>
     <div class="list_contact">
         <select 
@@ -53,7 +58,7 @@
             <label>Имя:</label>
             <input class="name" type="search" value="@ViewData["name"]" readonly>
             <label>Номер:</label>
-            <input class="phone" type="search" value="@ViewData["phone"]" readonly>
+            <input class="phone" id="phone" type="search" value="@ViewData["phone"]" readonly>
             <label>Email:</label>
             <input class="email" type="search" value="@ViewData["email"]" readonly>
         </div>

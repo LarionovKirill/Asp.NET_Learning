@@ -70,5 +70,17 @@ namespace Contact.DAL.Repository
             _database.Contacts.Remove(contact);
             await _database.SaveChangesAsync();
         }
+
+        /// <summary>
+        /// Нахождение контактов по переданной маске.
+        /// </summary>
+        /// <param name="mask">Маска имени контакта.</param>
+        /// <returns></returns>
+        public IEnumerable<ContactEntity> FindContacts(string mask)
+        {
+            mask = mask.ToLower();
+            var foundСontacts = _database.Contacts.Where(x => x.Name.ToLower().Contains(mask));
+            return foundСontacts;
+        }
     }
 }

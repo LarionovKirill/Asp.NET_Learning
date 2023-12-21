@@ -30,7 +30,7 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_contactRepository.GetContacts());
+            return View(_contactRepository.GetContacts().OrderBy(p=>p.Name));
         }
 
         /// <summary>
@@ -59,7 +59,8 @@ namespace ContactAppASP.Controllers
             ViewData["photo"] = "data:image/png;base64,"
                     + Convert.ToBase64String(contact.Photo);
             ContactService.SelectedId = id;
-            return View("Index", _contactRepository.GetContacts());
+            var sortContactList = _contactRepository.GetContacts().OrderBy(p => p.Name);
+            return View("Index", sortContactList);
         }
 
         /// <summary>
@@ -72,7 +73,8 @@ namespace ContactAppASP.Controllers
         {
             await _contactRepository.Delete(id);
             ContactService.SelectedId = -1;
-            return View("Index", _contactRepository.GetContacts());
+            var sortContactList = _contactRepository.GetContacts().OrderBy(p => p.Name);
+            return View("Index", sortContactList);
         }
 
         /// <summary>

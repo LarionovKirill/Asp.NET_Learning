@@ -17,6 +17,11 @@ function showInfo() {
             $(".container").html(data);
             select = document.querySelector('select');
             select.selectedIndex = index;
+            phoneInput = document.getElementById("phone");
+            mask = new IMask(phoneInput, {
+                mask: '+{7} (000) 000-00-00',
+                lazy: false,
+            });
         },
         error: function (err) {
             console.log(err);
