@@ -1,7 +1,12 @@
 ﻿/**
- * Список цветов окраски фона.
+ * Цвет фона ошибочного поля.
  */
-const colors = { Error: "#F08080", Correct: "rgb(255, 255, 255)", White: "#FFFFFF" };
+const errorColor = "#F08080";
+
+/**
+ * Цвет фона верного поля.
+ */
+const correctColor = "#FFFFFF";
 
 /**
  * Хранит кнопку сохранения.
@@ -12,35 +17,63 @@ var saveButton = document.getElementById("saveBut");
  * Хранит поле ввода имени.
  */
 const nameInput = document.getElementById("name");
+
+/**
+ * Поле валидности имени.
+ */
+var isNameValid;
+
 if (nameInput.value.length != 0)
 {
-    nameInput.style.backgroundColor = colors.White;
+    nameInput.style.backgroundColor = correctColor;
+    isNameValid = true;
 }
 else
 {
-    nameInput.style.backgroundColor = colors.Error;
+    nameInput.style.backgroundColor = errorColor;
+    isNameValid = false;
 }
+
+
 /**
  * Хранит поле ввода номера телефона.
  */
 const phoneInput = document.getElementById("phone");
-if (phoneInput.value.length != 0) {
-    phoneInput.style.backgroundColor = colors.White;
+
+/**
+ * Поле валидности номера.
+ */
+var isPhoneValid;
+
+if (phoneInput.value.length != 0)
+{
+    phoneInput.style.backgroundColor = correctColor;
+    isPhoneValid = true;
 }
-else {
-    phoneInput.style.backgroundColor = colors.Error;
+else
+{
+    phoneInput.style.backgroundColor = errorColor;
+    isPhoneValid = false;
 }
 /**
  * Хранит поле ввода Email.
  */
 const emailInput = document.getElementById("email");
+
+/**
+ * Поле валидности email.
+ */
+var isEmailValid;
+
 if (emailInput.value.length != 0)
 {
-    emailInput.style.backgroundColor = colors.White;
+    emailInput.style.backgroundColor = correctColor;
+    isEmailValid = true;
 }
 else
 {
-    emailInput.style.backgroundColor = colors.Error;
+    emailInput.style.backgroundColor = errorColor;
+    isEmailValid = false;
 }
 
 /**
@@ -58,12 +91,14 @@ function phoneValidation()
 {
     if (phoneInput.value.includes('_') == true)
     {
-        phoneInput.style.backgroundColor = colors.Error;
+        phoneInput.style.backgroundColor = errorColor;
         saveButton.disabled = true;
+        isPhoneValid = false;
         return;
     }
-    phoneInput.style.backgroundColor = colors.White;
-    fullValidation();
+    phoneInput.style.backgroundColor = correctColor;
+    isPhoneValid = true;
+    CheckCorrectFields();
 }
 
 /**
@@ -78,12 +113,14 @@ function nameValidation()
 {
     if (nameInput.value.length > 100 || nameInput.value.length<1)
     {
-        nameInput.style.backgroundColor = colors.Error;
+        nameInput.style.backgroundColor = errorColor;
         saveButton.disabled = true;
+        isNameValid = false;
         return;
     }
-    nameInput.style.backgroundColor = colors.White;
-    fullValidation();
+    nameInput.style.backgroundColor = correctColor;
+    isNameValid = true;
+    CheckCorrectFields();
 }
 
 /**
@@ -98,16 +135,19 @@ function emailValidation() {
     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,5})$/;
     if (emailInput.value.length > 100 || reg.test(emailInput.value) == false)
     {
-        emailInput.style.backgroundColor = colors.Error;
+        emailInput.style.backgroundColor = errorColor;
         saveButton.disabled = true;
+        isEmailValid = false;
         return;
     }
     if (emailInput.value.length == 0)
     {
-        emailInput.style.backgroundColor = colors.Error;
+        emailInput.style.backgroundColor = errorColor;
+        isEmailValid = false;
     }
-    emailInput.style.backgroundColor = colors.White;
-    fullValidation();
+    emailInput.style.backgroundColor = correctColor;
+    isEmailValid = true;
+    CheckCorrectFields();
 }
 
 /**
@@ -116,14 +156,15 @@ function emailValidation() {
 emailInput.addEventListener("input", emailValidation);
 
 /**
- * Проверка правильности всех полей. 
+ * Метод проверяет все поля на валидность.
  */
-function fullValidation()
+function CheckCorrectFields()
 {
-    if (emailInput.style.backgroundColor == colors.Correct &&
-        nameInput.style.backgroundColor == colors.Correct &&
-        phoneInput.style.backgroundColor == colors.Correct)
-    {
+    if (isEmailValid && isNameValid && isPhoneValid) {
         saveButton.disabled = false;
+    }
+    else
+    {
+        saveButton.disabled = true;
     }
 }
