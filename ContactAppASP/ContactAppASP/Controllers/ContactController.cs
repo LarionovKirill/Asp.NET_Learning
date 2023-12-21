@@ -30,7 +30,7 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_contactRepository.GetContacts().OrderBy(p=>p.Name));
+            return View(ContactService.PrepareContactList(_contactRepository));
         }
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace ContactAppASP.Controllers
             ViewData["photo"] = "data:image/png;base64,"
                     + Convert.ToBase64String(contact.Photo);
             ContactService.SelectedId = id;
-            var sortContactList = _contactRepository.GetContacts().OrderBy(p => p.Name);
-            return View("Index", sortContactList);
+            var viewList = ContactService.PrepareContactList(_contactRepository);
+            return View("Index", viewList);
         }
 
         /// <summary>
@@ -73,8 +73,8 @@ namespace ContactAppASP.Controllers
         {
             await _contactRepository.Delete(id);
             ContactService.SelectedId = -1;
-            var sortContactList = _contactRepository.GetContacts().OrderBy(p => p.Name);
-            return View("Index", sortContactList);
+            var viewList = ContactService.PrepareContactList(_contactRepository);
+            return View("Index", viewList);
         }
 
         /// <summary>
@@ -145,14 +145,23 @@ namespace ContactAppASP.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Поиска контактов по переданной маске.
+        /// </summary>
+        /// <param name="mask">Маска имени.</param>
+        /// <returns>Возвращает на главную страницу со списков контактов,
+        /// подходящих по маску.</returns>
+        [HttpGet]
         public IActionResult FindContacts(string mask)
         {
             if (mask == null)
             {
+                ContactService.Mask = string.Empty;
                 return RedirectToAction("Index");
             }
-            var foundContacts = _contactRepository.FindContacts(mask);
-            return View("Index", foundContacts.OrderBy(p => p.Name));
+            ContactService.Mask = mask;
+            var viewList = ContactService.PrepareContactList(_contactRepository);
+            return View("Index", viewList);
         }
     }
 }

@@ -6,6 +6,8 @@ function showInfo() {
     var select = document.querySelector('select');
     var index = select.selectedIndex;
     var id = select[select.selectedIndex].id;
+    var search = document.getElementById('find');
+    var mask = search.value;
     if (id < 0) {
         alert('Выберите пользователя');
         return;
@@ -15,6 +17,8 @@ function showInfo() {
         url: "Contact/GetContact?id=" + id,
         success: function (data) {
             $(".container").html(data);
+            var search = document.getElementById('find');
+            search.value = mask;
             select = document.querySelector('select');
             select.selectedIndex = index;
             phoneInput = document.getElementById("phone");
@@ -35,6 +39,8 @@ function showInfo() {
 function removeContact() {
     var select = document.querySelector('select');
     var id = select[select.selectedIndex].id;
+    var search = document.getElementById('find');
+    var mask = search.value;
     if (id < 0) {
         alert('Выберите пользователя');
          return;
@@ -44,6 +50,8 @@ function removeContact() {
         url: "Contact/RemoveContact?id=" + id,
         success: function (data) {
             $(".container").html(data);
+            var search = document.getElementById('find');
+            search.value = mask;
         },
         error: function (err) {
             console.log(err);
