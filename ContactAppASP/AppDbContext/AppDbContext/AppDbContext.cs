@@ -9,11 +9,6 @@ namespace Contact.DAL.AppDbContext
     public class AppDbContext : DbContext
     {
         /// <summary>
-        /// Список контактов в базе данных.
-        /// </summary>
-        public DbSet<ContactEntity> Contacts { get; set; }
-
-        /// <summary>
         /// Создает экземпляр класса <see cref="AppDbContext"/>.
         /// </summary>
         /// <param name="options">Параметры базы данных.</param>
@@ -21,5 +16,10 @@ namespace Contact.DAL.AppDbContext
         {
             Database.EnsureCreated();
         }
+
+        /// <summary>
+        /// Список контактов в базе данных.
+        /// </summary>
+        public DbSet<ContactEntity> Contacts { get; set; }
     }
 }
