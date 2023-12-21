@@ -12,17 +12,36 @@ var saveButton = document.getElementById("saveBut");
  * Хранит поле ввода имени.
  */
 const nameInput = document.getElementById("name");
-nameInput.style.backgroundColor = colors.Error;
+if (nameInput.value.length != 0)
+{
+    nameInput.style.backgroundColor = colors.White;
+}
+else
+{
+    nameInput.style.backgroundColor = colors.Error;
+}
 /**
  * Хранит поле ввода номера телефона.
  */
 const phoneInput = document.getElementById("phone");
-phoneInput.style.backgroundColor = colors.Error;
+if (phoneInput.value.length != 0) {
+    phoneInput.style.backgroundColor = colors.White;
+}
+else {
+    phoneInput.style.backgroundColor = colors.Error;
+}
 /**
  * Хранит поле ввода Email.
  */
 const emailInput = document.getElementById("email");
-emailInput.style.backgroundColor = colors.Error;
+if (emailInput.value.length != 0)
+{
+    emailInput.style.backgroundColor = colors.White;
+}
+else
+{
+    emailInput.style.backgroundColor = colors.Error;
+}
 
 /**
 * Создает маску для номера телефона.
