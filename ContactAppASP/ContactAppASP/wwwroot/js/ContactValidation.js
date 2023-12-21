@@ -7,23 +7,17 @@ var saveButton = document.getElementById("saveBut");
  * Хранит поле ввода имени.
  */
 const nameInput = document.getElementById("name");
-
+nameInput.style.backgroundColor = "white";
 /**
  * Хранит поле ввода номера телефона.
  */
 const phoneInput = document.getElementById("phone");
-
+phoneInput.style.backgroundColor = "white";
 /**
  * Хранит поле ввода Email.
  */
 const emailInput = document.getElementById("email");
-
-/**
- * Начальный цвет фона TextBox.
- */
 emailInput.style.backgroundColor = "white";
-nameInput.style.backgroundColor = "white";
-phoneInput.style.backgroundColor = "white";
 
 /**
 * Создает маску для номера телефона.
