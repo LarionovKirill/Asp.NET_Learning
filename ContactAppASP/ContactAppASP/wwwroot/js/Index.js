@@ -37,13 +37,35 @@ function removeContact() {
     var id = select[select.selectedIndex].id;
     if (id < 0) {
         alert('Выберите пользователя');
-        return;
+         return;
     }
     $.ajax({
         method: "GET",
         url: "Contact/RemoveContact?id=" + id,
         success: function (data) {
             $(".container").html(data);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    })
+}
+
+/**
+ * Посылает AJAX - запрос для поиска контакта по имени.
+ */
+function searchContacts()
+{
+    var search = document.getElementById('find');
+    var mask = search.value;
+    $.ajax({
+        method: "GET",
+        url: "Contact/FindContacts?mask=" + mask,
+        success: function (data) {
+            $(".container").html(data);
+            var search = document.getElementById('find');
+            search.value = mask;
+            search.focus();
         },
         error: function (err) {
             console.log(err);

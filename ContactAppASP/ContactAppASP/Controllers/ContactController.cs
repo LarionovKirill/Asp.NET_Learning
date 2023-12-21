@@ -144,5 +144,15 @@ namespace ContactAppASP.Controllers
             ContactService.SelectedId = -1;
             return RedirectToAction("Index");
         }
+
+        public IActionResult FindContacts(string mask)
+        {
+            if (mask == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var foundContacts = _contactRepository.FindContacts(mask);
+            return View("Index", foundContacts.OrderBy(p => p.Name));
+        }
     }
 }

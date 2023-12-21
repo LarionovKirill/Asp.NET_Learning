@@ -55,6 +55,7 @@ else
     PhoneInput.style.backgroundColor = ErrorColor;
     isPhoneValid = false;
 }
+
 /**
  * Хранит поле ввода Email.
  */
