@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Contact.DAL.AppDbContext;
-using Microsoft.EntityFrameworkCore;
 using ContactAppASP.Services;
+using Contact.DAL.Repository;
 
 namespace ContactAppASP.Controllers
 {
@@ -11,17 +10,17 @@ namespace ContactAppASP.Controllers
     public class ContactController : Controller
     {
         /// <summary>
-        /// База данных.
+        /// Репозиторий.
         /// </summary>
-        private AppDbContext _database;
+        private IRepository _contactRepository;
 
         /// <summary>
         /// Конструктор контроллера <see cref="ContactController"/>.
         /// </summary>
         /// <param name="db">База данных.</param>
-        public ContactController(AppDbContext db)
+        public ContactController(IRepository db)
         {
-            _database = db;
+            _contactRepository = db;
         }
 
         /// <summary>
@@ -29,9 +28,9 @@ namespace ContactAppASP.Controllers
         /// </summary>
         /// <returns>Возвращает главную страница.</returns>
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _database.Contacts.ToListAsync());
+            return View(_contactRepository.GetContacts());
         }
 
         /// <summary>
@@ -51,16 +50,16 @@ namespace ContactAppASP.Controllers
         /// <param name="id">Переданный id контакта в базе.</param>
         /// <returns>Возвращает представление с информацией о контакте.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetContact(int id)
+        public IActionResult GetContact(int id)
         {
-            var contact = _database.Contacts.FirstOrDefault(x => x.Id == id);
+            var contact = _contactRepository.GetContact(id);
             ViewData["name"] = contact.Name;
             ViewData["phone"] = contact.Phone;
             ViewData["email"] = contact.Email;
             ViewData["photo"] = "data:image/png;base64,"
                     + Convert.ToBase64String(contact.Photo);
             ContactService.SelectedId = id;
-            return View("Index", await _database.Contacts.ToListAsync());
+            return View("Index", _contactRepository.GetContacts());
         }
 
         /// <summary>
@@ -71,14 +70,9 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public async Task<IActionResult> RemoveContact(int id)
         {
-            var contact = _database.Contacts.FirstOrDefault(x => x.Id == id);
-            if (contact != null) 
-            {
-                _database.Contacts.Remove(contact);
-                _database.SaveChanges();
-            }
+            await _contactRepository.Delete(id);
             ContactService.SelectedId = -1;
-            return View("Index", await _database.Contacts.ToListAsync());
+            return View("Index", _contactRepository.GetContacts());
         }
 
         /// <summary>
@@ -89,20 +83,17 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult EditContact()
         {
-            if (ContactService.SelectedId > 0)
+            if (ContactService.SelectedId <= 0)
             {
-                var contact = _database.Contacts.FirstOrDefault(x => x.Id == ContactService.SelectedId);
-                if (contact != null)
-                {
-                    ViewData["name"] = contact.Name;
-                    ViewData["phone"] = contact.Phone;
-                    ViewData["email"] = contact.Email;
-                    ViewData["photo"] = "data:image/png;base64,"
-                        + Convert.ToBase64String(contact.Photo);
-                }
-                return View("AddEditContact");
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            var contact = _contactRepository.GetContact(ContactService.SelectedId);
+            ViewData["name"] = contact.Name;
+            ViewData["phone"] = contact.Phone;
+            ViewData["email"] = contact.Email;
+            ViewData["photo"] = "data:image/png;base64,"
+                + Convert.ToBase64String(contact.Photo);
+            return View("AddEditContact");
         }
 
         /// <summary>
@@ -114,35 +105,29 @@ namespace ContactAppASP.Controllers
         /// <param name="photo">Фото.</param>
         /// <returns>Возвращает на главную страницу с исправленным контактом.</returns>
         [HttpPost]
-        public IActionResult SaveEditContact(
+        public async Task<IActionResult> SaveEditContact(
             string name, 
             string number, 
             string email, 
-            IFormFile photo)
+            IFormFile? photo)
         {
             if (ContactService.SelectedId < 0)
             {
                 var saveContact = ContactService.AddContact(name, number, email, photo);
-                _database.Contacts.Add(saveContact);
-                _database.SaveChanges();
+                await _contactRepository.Create(saveContact);
                 return RedirectToAction("Index");
             }
 
-            var editContact = _database.Contacts.FirstOrDefault(x => x.Id == ContactService.SelectedId);
-            if (editContact != null)
+            var editContact = _contactRepository.GetContact(ContactService.SelectedId);
+            editContact.Name= name;
+            editContact.Phone= number;
+            editContact.Email= email;
+            editContact.Id = ContactService.SelectedId;
+            if (photo != null)
             {
-                editContact.Name = name;
-                editContact.Phone = number;
-                editContact.Email = email;
-                byte[] imageData = null;
-                using (var binaryReader = new BinaryReader(photo.OpenReadStream()))
-                {
-                    imageData = binaryReader.ReadBytes((int)photo.Length);
-                }
-                editContact.Photo = imageData;
-                _database.Contacts.Update(editContact);
-                _database.SaveChanges();
+                editContact.Photo = ContactService.ConvertPhotoToBytes(photo);
             }
+            _contactRepository.Update(editContact);
             ContactService.SelectedId = -1;
             return RedirectToAction("Index");
         }
