@@ -1,4 +1,9 @@
 ﻿/**
+ * Список цветов окраски фона.
+ */
+const colors = { Error: "#F08080", Correct: "rgb(255, 255, 255)", White: "#FFFFFF" };
+
+/**
  * Хранит кнопку сохранения.
  */
 var saveButton = document.getElementById("saveBut");
@@ -7,17 +12,17 @@ var saveButton = document.getElementById("saveBut");
  * Хранит поле ввода имени.
  */
 const nameInput = document.getElementById("name");
-nameInput.style.backgroundColor = "white";
+nameInput.style.backgroundColor = colors.Error;
 /**
  * Хранит поле ввода номера телефона.
  */
 const phoneInput = document.getElementById("phone");
-phoneInput.style.backgroundColor = "white";
+phoneInput.style.backgroundColor = colors.Error;
 /**
  * Хранит поле ввода Email.
  */
 const emailInput = document.getElementById("email");
-emailInput.style.backgroundColor = "white";
+emailInput.style.backgroundColor = colors.Error;
 
 /**
 * Создает маску для номера телефона.
@@ -34,11 +39,11 @@ function phoneValidation()
 {
     if (phoneInput.value.includes('_') == true)
     {
-        phoneInput.style.backgroundColor = "#F08080";
+        phoneInput.style.backgroundColor = colors.Error;
         saveButton.disabled = true;
         return;
     }
-    phoneInput.style.backgroundColor = "white";
+    phoneInput.style.backgroundColor = colors.White;
     fullValidation();
 }
 
@@ -52,13 +57,13 @@ phoneInput.addEventListener('input', phoneValidation);
  */
 function nameValidation()
 {
-    if (nameInput.value.length > 100)
+    if (nameInput.value.length > 100 || nameInput.value.length<1)
     {
-        nameInput.style.backgroundColor = "#F08080";
+        nameInput.style.backgroundColor = colors.Error;
         saveButton.disabled = true;
         return;
     }
-    nameInput.style.backgroundColor = "white";
+    nameInput.style.backgroundColor = colors.White;
     fullValidation();
 }
 
@@ -74,15 +79,15 @@ function emailValidation() {
     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,5})$/;
     if (emailInput.value.length > 100 || reg.test(emailInput.value) == false)
     {
-        emailInput.style.backgroundColor = "#F08080";
+        emailInput.style.backgroundColor = colors.Error;
         saveButton.disabled = true;
         return;
     }
     if (emailInput.value.length == 0)
     {
-        emailInput.style.backgroundColor = "white";
+        emailInput.style.backgroundColor = colors.Error;
     }
-    emailInput.style.backgroundColor = "white";
+    emailInput.style.backgroundColor = colors.White;
     fullValidation();
 }
 
@@ -96,9 +101,9 @@ emailInput.addEventListener("input", emailValidation);
  */
 function fullValidation()
 {
-    if (emailInput.style.backgroundColor == "white" &&
-        nameInput.style.backgroundColor == "white" &&
-        phoneInput.style.backgroundColor == "white")
+    if (emailInput.style.backgroundColor == colors.Correct &&
+        nameInput.style.backgroundColor == colors.Correct &&
+        phoneInput.style.backgroundColor == colors.Correct)
     {
         saveButton.disabled = false;
     }
