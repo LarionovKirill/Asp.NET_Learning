@@ -8,6 +8,8 @@ function showInfo() {
     var id = select[select.selectedIndex].id;
     var search = document.getElementById('find');
     var mask = search.value;
+    var list = document.getElementById('list');
+    var letter = list.value;
     if (id < 0) {
         alert('Выберите пользователя');
         return;
@@ -22,6 +24,8 @@ function showInfo() {
             select = document.getElementById('contactList');
             select.selectedIndex = index;
             phoneInput = document.getElementById("phone");
+            var list = document.getElementById('list');
+            list.value = letter;
             mask = new IMask(phoneInput, {
                 mask: '+{7} (000) 000-00-00',
                 lazy: false,
