@@ -3,7 +3,7 @@
  * и выводит информацию на экран.
  */
 function showInfo() {
-    var select = document.querySelector('select');
+    var select = document.getElementById('contactList');
     var index = select.selectedIndex;
     var id = select[select.selectedIndex].id;
     var search = document.getElementById('find');
@@ -19,7 +19,7 @@ function showInfo() {
             $(".container").html(data);
             var search = document.getElementById('find');
             search.value = mask;
-            select = document.querySelector('select');
+            select = document.getElementById('contactList');
             select.selectedIndex = index;
             phoneInput = document.getElementById("phone");
             mask = new IMask(phoneInput, {
@@ -37,7 +37,7 @@ function showInfo() {
  * Посылает AJAX - запрос для удаления выбранного контакта.
  */
 function removeContact() {
-    var select = document.querySelector('select');
+    var select = document.getElementById('contactList');
     var id = select[select.selectedIndex].id;
     var search = document.getElementById('find');
     var mask = search.value;
@@ -74,6 +74,27 @@ function searchContacts()
             var search = document.getElementById('find');
             search.value = mask;
             search.focus();
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    })
+}
+
+/**
+ * Посылает AJAX - запрос для поиска контакта по первой букве.
+ */
+function findByFirstLetter()
+{
+    var list = document.getElementById('list');
+    var letter = list.value;
+    $.ajax({
+        method: "GET",
+        url: "Contact/FindByFirstLetter?letter=" + letter,
+        success: function (data) {
+            $(".container").html(data);
+            var list = document.getElementById('list');
+            list.value = letter;
         },
         error: function (err) {
             console.log(err);

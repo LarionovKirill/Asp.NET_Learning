@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ContactAppASP.Services;
 using Contact.DAL.Repository;
+using System.Threading.Tasks;
 
 namespace ContactAppASP.Controllers
 {
@@ -157,11 +158,32 @@ namespace ContactAppASP.Controllers
             if (mask == null)
             {
                 ContactService.Mask = string.Empty;
+                ContactService.FirstLetter = string.Empty;
                 return RedirectToAction("Index");
             }
             ContactService.Mask = mask;
             var viewList = ContactService.PrepareContactList(_contactRepository);
             return View("Index", viewList);
+        }
+
+        /// <summary>
+        /// Поиск контактов по первой букве контакта.
+        /// </summary>
+        /// <param name="letter">Начальная буква.</param>
+        /// <returns>Возвращает на главную страницу со списком контактов,
+        /// подходящих под первую букву.</returns>
+        [HttpGet]
+        public IActionResult FindByFirstLetter(string letter)
+        {
+            if (letter!="...")
+            {
+                ContactService.Mask = string.Empty;
+                ContactService.FirstLetter = letter;
+                return RedirectToAction("Index");
+            }
+            ContactService.Mask = string.Empty;
+            ContactService.FirstLetter = string.Empty;
+            return RedirectToAction("Index");
         }
     }
 }

@@ -24,6 +24,11 @@ namespace ContactAppASP.Services
         public static string Mask { get; set; } = string.Empty;
 
         /// <summary>
+        /// Первая буква для поиска контактов.
+        /// </summary>
+        public static string FirstLetter { get; set; } = string.Empty;
+
+        /// <summary>
         /// Метод создания контакта для передачи его в базу данных.
         /// </summary>
         /// <param name="name">Имя контакта.</param>
@@ -84,6 +89,10 @@ namespace ContactAppASP.Services
             if (Mask != string.Empty)
             {
                 finalList = FindContacts(finalList);
+            }
+            else if (FirstLetter!=string.Empty)
+            {
+                finalList = finalList.Where(x=>x.Name.StartsWith(FirstLetter));
             }
             finalList = finalList.OrderBy(x => x.Name);
             return finalList;

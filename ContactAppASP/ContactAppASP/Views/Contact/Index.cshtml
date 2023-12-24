@@ -11,12 +11,21 @@
             placeholder="Введите имя"
             id="find"
             oninput="searchContacts()">
+        <select 
+            id="list"
+            onchange="findByFirstLetter()">
+            <option>...</option>
+            @for(char i='А'; i<='Я'; i++)
+            {
+                <option>@i.ToString()</option>
+            }
+        </select>
     </div>
     <div class="list_contact">
         <select 
             size="5" 
-            class="contactList" 
-            onclick="showInfo()">
+            class="contactList"
+            id="contactList">
             @foreach(var contact in Model)
             {
                 <option 
