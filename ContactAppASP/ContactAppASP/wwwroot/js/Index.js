@@ -26,6 +26,13 @@ function showInfo() {
             phoneInput = document.getElementById("phone");
             var list = document.getElementById('list');
             list.value = letter;
+            if (letter.length > 1) {
+                var search = document.getElementById('find');
+                search.disabled = false;
+                return
+            }
+            var search = document.getElementById('find');
+            search.disabled = true;
             mask = new IMask(phoneInput, {
                 mask: '+{7} (000) 000-00-00',
                 lazy: false,
@@ -99,6 +106,13 @@ function findByFirstLetter()
             $(".container").html(data);
             var list = document.getElementById('list');
             list.value = letter;
+            if (letter.length > 1) {
+                var search = document.getElementById('find');
+                search.disabled = false;
+                return
+            }
+            var search = document.getElementById('find');
+            search.disabled = true;
         },
         error: function (err) {
             console.log(err);
