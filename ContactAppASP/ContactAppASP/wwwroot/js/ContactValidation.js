@@ -11,7 +11,7 @@ const CorrectColor = "#FFFFFF";
 /**
  * Маска проверки Email.
  */
-const emailMask = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,5})$/;
+const EmailMask = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,5})$/;
 
 /**
  * Хранит кнопку сохранения.
@@ -138,7 +138,7 @@ NameInput.addEventListener("input", nameValidation);
  * Валидация Email.
  */
 function emailValidation() {
-    if (EmailInput.value.length > 100 || emailMask.test(EmailInput.value) == false)
+    if (EmailInput.value.length > 100 || EmailMask.test(EmailInput.value) == false)
     {
         EmailInput.style.backgroundColor = ErrorColor;
         saveButton.disabled = true;
