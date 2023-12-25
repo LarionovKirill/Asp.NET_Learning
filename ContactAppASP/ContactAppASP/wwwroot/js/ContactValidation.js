@@ -9,6 +9,11 @@ const ErrorColor = "#F08080";
 const CorrectColor = "#FFFFFF";
 
 /**
+ * Маска проверки Email.
+ */
+const EmailMask = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,5})$/;
+
+/**
  * Хранит кнопку сохранения.
  */
 var saveButton = document.getElementById("saveBut");
@@ -55,6 +60,7 @@ else
     PhoneInput.style.backgroundColor = ErrorColor;
     isPhoneValid = false;
 }
+
 /**
  * Хранит поле ввода Email.
  */
@@ -132,8 +138,7 @@ NameInput.addEventListener("input", nameValidation);
  * Валидация Email.
  */
 function emailValidation() {
-    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,5})$/;
-    if (EmailInput.value.length > 100 || reg.test(EmailInput.value) == false)
+    if (EmailInput.value.length > 100 || EmailMask.test(EmailInput.value) == false)
     {
         EmailInput.style.backgroundColor = ErrorColor;
         saveButton.disabled = true;

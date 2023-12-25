@@ -1,4 +1,5 @@
-﻿using Contact.Domain.Entity;
+﻿using Contact.DAL.Repository;
+using Contact.Domain.Entity;
 
 namespace ContactAppASP.Services
 {
@@ -13,9 +14,19 @@ namespace ContactAppASP.Services
         private const string Path = "wwwroot/images/Empty_User_818x500.png";
 
         /// <summary>
-        /// Выбранный Id.
+        /// Возвращает и задает выбранный Id записи.
         /// </summary>
         public static int SelectedId { get; set; }
+
+        /// <summary>
+        /// Возвращает и задает маску поиска контакта.
+        /// </summary>
+        public static string Mask { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Возвращает и задает первую букву для поиска контактов.
+        /// </summary>
+        public static string FirstLetter { get; set; } = string.Empty;
 
         /// <summary>
         /// Метод создания контакта для передачи его в базу данных.
@@ -53,6 +64,38 @@ namespace ContactAppASP.Services
             using var memoryStream = new MemoryStream();
             photo.CopyTo(memoryStream);
             return memoryStream.ToArray();
+        }
+
+        /// <summary>
+        /// Нахождение контактов по маске.
+        /// </summary>
+        /// <param name="contacts">Список где необходимо найти контакты.</param>
+        /// <returns>Список, подходящий под маску имени.</returns>
+        public static IEnumerable<ContactEntity> FindContacts(IEnumerable<ContactEntity> contacts)
+        {
+            var mask = Mask.ToLower();
+            var foundСontacts = contacts.Where(x => x.Name.ToLower().Contains(mask));
+            return foundСontacts;
+        }
+
+        /// <summary>
+        /// Метод подготавливает список контактов для передачи клиенту.
+        /// </summary>
+        /// <param name="repository">Репозиторий базы данных.</param>
+        /// <returns>Список для вывода клиенту.</returns>
+        public static IEnumerable<ContactEntity> PrepareContactList(IRepository repository)
+        {
+            var finalList = repository.GetContacts();
+            if (Mask != string.Empty)
+            {
+                finalList = FindContacts(finalList);
+            }
+            else if (FirstLetter!=string.Empty)
+            {
+                finalList = finalList.Where(x=>x.Name.ToLower().StartsWith(FirstLetter));
+            }
+            finalList = finalList.OrderBy(x => x.Name);
+            return finalList;
         }
     }
 }
