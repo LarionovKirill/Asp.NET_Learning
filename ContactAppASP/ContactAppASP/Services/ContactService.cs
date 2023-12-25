@@ -14,17 +14,17 @@ namespace ContactAppASP.Services
         private const string Path = "wwwroot/images/Empty_User_818x500.png";
 
         /// <summary>
-        /// Выбранный Id.
+        /// Возвращает и задает выбранный Id записи.
         /// </summary>
         public static int SelectedId { get; set; }
 
         /// <summary>
-        /// Маска поиска контакта.
+        /// Возвращает и задает маску поиска контакта.
         /// </summary>
         public static string Mask { get; set; } = string.Empty;
 
         /// <summary>
-        /// Первая буква для поиска контактов.
+        /// Возвращает и задает первую букву для поиска контактов.
         /// </summary>
         public static string FirstLetter { get; set; } = string.Empty;
 

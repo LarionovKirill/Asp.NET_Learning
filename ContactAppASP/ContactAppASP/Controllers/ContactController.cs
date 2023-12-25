@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ContactAppASP.Services;
 using Contact.DAL.Repository;
-using System.Threading.Tasks;
 
 namespace ContactAppASP.Controllers
 {
