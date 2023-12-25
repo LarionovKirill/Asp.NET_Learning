@@ -177,7 +177,7 @@ namespace ContactAppASP.Controllers
             if (letter!="...")
             {
                 ContactService.Mask = string.Empty;
-                ContactService.FirstLetter = letter;
+                ContactService.FirstLetter = letter.ToLower();
                 return RedirectToAction("Index");
             }
             ContactService.Mask = string.Empty;

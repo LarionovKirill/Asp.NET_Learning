@@ -92,7 +92,7 @@ namespace ContactAppASP.Services
             }
             else if (FirstLetter!=string.Empty)
             {
-                finalList = finalList.Where(x=>x.Name.StartsWith(FirstLetter));
+                finalList = finalList.Where(x=>x.Name.ToLower().StartsWith(FirstLetter));
             }
             finalList = finalList.OrderBy(x => x.Name);
             return finalList;
