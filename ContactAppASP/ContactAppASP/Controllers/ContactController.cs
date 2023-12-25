@@ -174,7 +174,7 @@ namespace ContactAppASP.Controllers
         [HttpGet]
         public IActionResult FindByFirstLetter(string letter)
         {
-            if (letter!="...")
+            if (letter.Length==1)
             {
                 ContactService.Mask = string.Empty;
                 ContactService.FirstLetter = letter.ToLower();
