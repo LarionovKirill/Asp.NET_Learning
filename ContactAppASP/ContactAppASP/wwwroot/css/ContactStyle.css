@@ -67,10 +67,10 @@ option:active {
 }
 
 .find {
-	width: 85%;
+	width: 100%;
 	font-size: 18px;
 	border-radius: 8px;
-	height:35px;
+	height: 35px;
 }
 
 .buttons_contact input:active {
@@ -99,4 +99,5 @@ option:active {
 	border-radius: 8px;
 	height: 35px;
 	width: 15%;
+	margin: 0px 0px 0px 5px;
 }
